@@ -30,6 +30,52 @@ header-includes:
 - \pagestyle{fancy}
 ---
 
+```{r setup}
+knitr::opts_chunk$set(echo = TRUE, message=FALSE, warning= FALSE)
+```
+
+```{r libraries}
+library(tidyverse)
+library(knitr)
+library(readr)
+library(lubridate)
+library(bookdown)
+```
+
+```{r cleaning-data}
+# read data
+storm17 <- read_csv("data/StormEvents_details-ftp_v1.0_d2017_c20200121.csv")
+storm18 <- read_csv("data/StormEvents_details-ftp_v1.0_d2018_c20200317.csv")
+storm19 <- read_csv("data/StormEvents_details-ftp_v1.0_d2019_c20200516.csv")
+
+# change date format
+clean <- function(x) {
+x$BEGIN_DATE_TIME <- dmy_hms(x$BEGIN_DATE_TIME) 
+x$END_DATE_TIME <- dmy_hms(x$END_DATE_TIME)
+x$BEGIN_DAY <- mday(x$BEGIN_DATE_TIME)
+x$END_DAY <- mday(x$END_DATE_TIME)
+x$BEGIN_TIME <- format(as.POSIXct(x$BEGIN_DATE_TIME) ,format = "%H:%M:%S") 
+x$END_TIME <- format(as.POSIXct(x$END_DATE_TIME) ,format = "%H:%M:%S") 
+x$MONTH_NAME <- month(x$BEGIN_DATE_TIME, label=TRUE)
+
+#unselect column with NA value; unselect BEGIN MONTH and END MONTH because there are already MONTH column
+x <- x %>% select(-BEGIN_YEARMONTH, -END_YEARMONTH, -EPISODE_ID, -WFO, -CZ_TIMEZONE, -SOURCE, -MAGNITUDE_TYPE,-CATEGORY, -FLOOD_CAUSE,-TOR_OTHER_WFO,- TOR_OTHER_CZ_STATE, -TOR_OTHER_CZ_FIPS, - TOR_OTHER_CZ_NAME, - BEGIN_AZIMUTH, -BEGIN_LOCATION, -END_AZIMUTH, -END_LOCATION, -EPISODE_NARRATIVE, -EVENT_NARRATIVE, -DATA_SOURCE) 
+}
+
+storm17 <- clean(storm17)
+storm18 <- clean(storm18)
+storm19 <- clean(storm19)
+storm_all <- rbind(storm17,storm18,storm19)
+```
+
+\clearpage
+
+# Introduction
+
+\clearpage
+
+# Methodology
+
 \clearpage
 
 # Section 1
@@ -49,6 +95,9 @@ header-includes:
 
 # Section 4
 
+\clearpage
+
+# Conclusion
 
 \clearpage
 
