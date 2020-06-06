@@ -79,6 +79,50 @@ storm_all <- rbind(storm17,storm18,storm19)
 \clearpage
 
 # Section 1
+```{r}
+library(ggmap)
+library(ggthemes)
+library(ggplot2)
+usa_bbox <- c(-130,
+              20,
+              -60,
+              50)
+usa_map <- get_map(location = usa_bbox, source = "osm")
+storm_locations <- data.frame(storm19 %>%
+  select(STATE, EVENT_TYPE, BEGIN_LAT, BEGIN_LON) %>%
+  filter(BEGIN_LON>usa_bbox[1], BEGIN_LON<usa_bbox[3],
+         BEGIN_LAT>usa_bbox[2], BEGIN_LAT<usa_bbox[4]) )
+ggmap(usa_map) +
+  geom_point(data= storm_locations, aes(x= BEGIN_LON, y = BEGIN_LAT),
+             color = "#746FB2",alpha = 0.3, size = 0.5) +
+  facet_wrap(~ EVENT_TYPE)
+```
+
+```{r}
+event_counts <- storm19 %>%
+  select(STATE, EVENT_TYPE, BEGIN_LAT, BEGIN_LON) %>%
+  group_by(EVENT_TYPE) %>%
+  summarise(count=n())%>%
+  arrange(desc(count))%>%
+  head(10)
+
+knitr::kable(event_counts, caption = "Top5 storm event frequency in 2019")
+```
+
+```{r}
+storm_locations <- data.frame(storm19 %>%
+  select(STATE, EVENT_TYPE, BEGIN_LAT, BEGIN_LON) %>%
+  filter(EVENT_TYPE %in%c("Thunderstorm Wind", 
+                    "Hail",
+                    "Flood",
+                    "Flash Flood",
+                    "Winter Weather")))
+ggmap(usa_map) +
+  geom_point(data= storm_locations, aes(x= BEGIN_LON, y = BEGIN_LAT, color = EVENT_TYPE),
+              alpha = 0.3, size = 0.5) +
+  theme_map()
+```
+
 
 
 \clearpage
