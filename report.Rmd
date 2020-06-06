@@ -1,6 +1,6 @@
 ---
 title: "Assignment 4 ETC5513"
-author: "XXXX"
+author: "Yan Ma"
 output:
   pdf_document:
     citation_package: natbib
@@ -93,7 +93,117 @@ storm_all <- rbind(storm17,storm18,storm19)
 
 \clearpage
 
-# Section 4
+# Section 4: Injuries and Deaths
+
+## Direct injuries and deaths by month and year
+
+```{r fig1, fig.cap = "Total direct injuries by month"}
+storm_all %>% 
+  group_by(YEAR, MONTH_NAME) %>% 
+  mutate(injury_tot = sum(INJURIES_DIRECT)) %>% 
+  ggplot(aes(x = MONTH_NAME, y = injury_tot, fill = MONTH_NAME)) + 
+  geom_col(position = "dodge") + 
+  coord_flip() + 
+  facet_grid(~ YEAR) + 
+  guides(fill=FALSE) + 
+  ggtitle("Total direct injuries by month")
+```
+
+```{r fig2, fig.cap = "Total direct deaths by month"}
+storm_all %>% 
+  group_by(YEAR, MONTH_NAME) %>% 
+  mutate(death_tot = sum(DEATHS_DIRECT)) %>% 
+  ggplot(aes(x = MONTH_NAME, y = death_tot, fill = MONTH_NAME)) + 
+  geom_col(position = "dodge") + 
+  coord_flip() + 
+  facet_grid(~ YEAR) + 
+  guides(fill=FALSE) + 
+  ggtitle("Total direct deaths by month")
+```
+
+## Direct injuries and deaths by state
+
+```{r fig3, fig.cap = "Total direct injuries by state", fig.height=8}
+storm_all %>% 
+  group_by(YEAR, STATE) %>% 
+  mutate(injury_tot_state = sum(INJURIES_DIRECT)) %>% 
+  ggplot(aes(x = STATE, y = injury_tot_state, fill = STATE)) + 
+  geom_col(position = "dodge") + 
+  coord_flip() + 
+  facet_grid(~ YEAR) + 
+  guides(fill=FALSE) + 
+  ggtitle("Total direct injuries by state") + 
+  theme(axis.text.x = element_text(size=12), 
+        axis.text.y = element_text(size=2))
+```
+
+```{r fig4, fig.cap = "Total direct deaths by state", fig.height=8}
+storm_all %>% 
+  group_by(YEAR, STATE) %>% 
+  mutate(death_tot_state = sum(DEATHS_DIRECT)) %>% 
+  ggplot(aes(x = STATE, y = death_tot_state, fill = STATE)) + 
+  geom_col(position = "dodge") + 
+  coord_flip() + 
+  facet_grid(~ YEAR) + 
+  guides(fill=FALSE) + 
+  ggtitle("Total direct deaths by state") + 
+  theme(axis.text.x = element_text(size=12), 
+        axis.text.y = element_text(size=2))
+```
+
+## Direct injuries and deaths by major event type
+
+```{r tab1, tab.cap = "Major event types cause direct injuries over years"}
+library(kableExtra)
+storm_all %>% 
+  group_by(EVENT_TYPE) %>% 
+  summarise(injury_event = sum(INJURIES_DIRECT)) %>% 
+  arrange(desc(injury_event)) %>% 
+  head(5) %>% 
+  kable(caption = "Major event types cause direct injuries over years",  booktabs = T) %>% 
+  kable_styling(latex_options = c("striped", "hold_position"))
+
+major_types_injury <- c("Tornado", "Heat", "Thunderstorm Wind", "Excessive Heat", "Lightning")
+```
+
+```{r fig5, fig.cap = "Total direct injuries by event type"}
+storm_all %>% 
+  filter(EVENT_TYPE == major_types_injury) %>% 
+  group_by(YEAR, EVENT_TYPE) %>% 
+  mutate(injury_tot_type = sum(INJURIES_DIRECT)) %>% 
+  ggplot(aes(x = EVENT_TYPE, y = injury_tot_type, fill = EVENT_TYPE)) + 
+  geom_col(position = "dodge") + 
+  facet_wrap(~ YEAR) + 
+  guides(fill=FALSE) + 
+  ggtitle("Total direct injuries by event type") + 
+  theme(axis.text.x = element_text(angle=90, hjust=1))
+```
+
+```{r tab2, tab.cap = "Major event types cause deaths over years"}
+library(kableExtra)
+storm_all %>% 
+  group_by(EVENT_TYPE) %>% 
+  summarise(death_event = sum(DEATHS_DIRECT)) %>% 
+  arrange(desc(death_event)) %>% 
+  head(5) %>% 
+  kable(caption = "Major event types cause deaths over years",  booktabs = T) %>% 
+  kable_styling(latex_options = c("striped", "hold_position"))
+
+major_types_death <- c("Excessive Heat", "Flash Flood", "Heat", "Rip Current", "Wildfire")
+```
+
+```{r fig6, fig.cap = "Total direct deaths by event type"}
+storm_all %>% 
+  filter(EVENT_TYPE == major_types_death) %>% 
+  group_by(YEAR, EVENT_TYPE) %>% 
+  mutate(death_tot_type = sum(DEATHS_DIRECT)) %>% 
+  ggplot(aes(x = EVENT_TYPE, y = death_tot_type, fill = EVENT_TYPE)) + 
+  geom_col(position = "dodge") + 
+  facet_wrap(~ YEAR) + 
+  guides(fill=FALSE) + 
+  ggtitle("Total direct injuries by event type") + 
+  theme(axis.text.x = element_text(angle=90, hjust=1))
+```
 
 \clearpage
 
