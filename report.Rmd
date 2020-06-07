@@ -40,6 +40,7 @@ library(knitr)
 library(readr)
 library(lubridate)
 library(bookdown)
+theme_set(theme_minimal())
 ```
 
 ```{r cleaning-data}
@@ -89,6 +90,30 @@ storm_all <- rbind(storm17,storm18,storm19)
 \clearpage
 
 # Section 3
+
+## The trend of occurence of the event changing by year in each state
+
+```{r frequencytrend}
+storm_frequency_state <- storm_all %>%
+  group_by(STATE, YEAR) %>%
+  count(EVENT_TYPE) %>%
+  rename(FREQ = n) 
+```
+
+```{r frequencytrendnew}
+storm_frequency_state_new <- storm_all %>%
+  group_by(EVENT_TYPE) %>%
+  count(EVENT_TYPE) %>%
+  rename(FREQ = n) %>%
+  arrange(desc(FREQ))%>%
+  head(5) %>%
+  select(EVENT_TYPE)
+```
+
+```{r topnewtable}
+top5_newtable <- right_join(storm_frequency_state, storm_frequency_state_new, by = "EVENT_TYPE") %>%
+  group_by(STATE)
+```
 
 
 \clearpage
