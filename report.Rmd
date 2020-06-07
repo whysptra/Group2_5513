@@ -2,7 +2,7 @@
 title: "Assignment 4 ETC5513"
 author: "XXXX"
 output:
-  pdf_document:
+  bookdown::pdf_document2:
     citation_package: natbib
     highlight: tango
     number_sections: yes
@@ -13,7 +13,7 @@ output:
     toc: yes
     toc_depth: '2'
 bibliography: references.bib 
-biblio-style: dinat
+biblio-style: plainnat
 subtitle: Team name
 header-includes:
 - \usepackage{titling}
@@ -30,8 +30,8 @@ header-includes:
 - \pagestyle{fancy}
 ---
 
-```{r setup}
-knitr::opts_chunk$set(echo = TRUE, message=FALSE, warning= FALSE)
+```{r setup,include=FALSE}
+knitr::opts_chunk$set(echo = FALSE, message=FALSE, warning= FALSE)
 ```
 
 ```{r libraries}
@@ -40,6 +40,7 @@ library(knitr)
 library(readr)
 library(lubridate)
 library(bookdown)
+library(usmap)
 ```
 
 ```{r cleaning-data}
@@ -95,6 +96,114 @@ storm_all <- rbind(storm17,storm18,storm19)
 
 # Section 4
 
+Based on the calculation of the number of tornadoes that occur each year, the United States becomes a country with more than 1000 events each year. @USTornad80 Table \@ref(tab:table-tornado) shows the number of tornadoes from 2017 to 2019 in the United States.
+The table made by `kable` function from `knitr` package. @knitr 
+
+```{r table-tornado}
+storm_all %>% filter(EVENT_TYPE %in% c("Tornado")) %>%
+  group_by(YEAR, EVENT_TYPE) %>%
+  tally() %>%
+  kable(caption = "Total number of Tornado that occurs from 2017-2019 in United States") %>%
+  kableExtra::kable_styling(latex_options = "hold_position")
+```
+
+We use `ggplot2` package to map the distribution overtime. @ggplot2 To see the number of tornadoes that occur each month during these three years can be seen in Figure \@ref(total-f-scale). From this plot, it can be seen that most tornadoes occur on average in the range of April and May. 2019 recorded a high number of tornadoes in May compared to the previous two years.
+
+```{r total-f-scale, fig.cap= "Tornado frequency from 2017-2019 in USA", fig.width =7, fig.height=4}
+# Total F scale
+storm_all$YEAR<- as.character(storm_all$YEAR)
+storm_all %>% filter(EVENT_TYPE %in% c("Tornado")) %>%
+  group_by(YEAR, MONTH_NAME) %>%
+  tally() %>%
+  ggplot(aes(x=MONTH_NAME,
+             y= n,
+             group = YEAR,
+             colour=YEAR))+
+  geom_line() +
+  geom_point() +
+  theme(legend.position = "bottom")
+```
+
+\clearpage
+
+Figure \@ref(fig:map-tornado) shows the map of the United States with the highest number of tornadoes during 2017-2019. The map plotted using `plot_usmap` function from `usmap` package. @usmap 
+
+```{r map-tornado, fig.cap= "United States map of total tornado in each state", fig.height=3, fig.width=6}
+statepop1 <- storm_all %>% filter(EVENT_TYPE %in% c("Tornado")) %>%
+  group_by(STATE_FIPS, STATE) %>%
+  tally() %>%
+  summarise(total = sum(n))
+
+# make sure fips table is char and has the name fips to match the usmap function
+statepop1$STATE_FIPS <- as.character(statepop1$STATE_FIPS)
+statepop1 <- statepop1 %>% rename(fips=STATE_FIPS)
+
+plot_usmap(data = statepop1, values = "total", label=TRUE, label_color = "Black")+
+  scale_fill_continuous(
+    low = "white", high = "red", name = "Total Tornado 2017-2019", label = scales::comma
+  ) + theme(legend.position = "right")
+```
+
+Each tornado that occurs has a scale. Based on dataset documentation, enhanced Fujita Scale describes the strength of the tornado based on the amount and type of damage caused by the tornado. @documentation
+The F scale listed as Table \@ref(tab:scale) :
+
+```{r scale}
+scale_f <- data_frame("Scale" = c("EF0","EF1","EF2","EF3", "EF4", "EF5", "EFU"),
+                      "Category" = c("Light","Moderate","Significant","Severe", "Devastating","Incredible","Unknown"),
+                      "Speed" = c("40 – 72 mph","73 – 112 mph","113 – 157 mph","158 – 206 mph","207 – 260 mph","261 – 318 mph","Unknown"))
+kable(scale_f, caption = "Level of Tornadoes") %>%
+    kableExtra::kable_styling(latex_options = "hold_position")
+```
+When there is no tornado damage, but there is evidence a tornado existed (citation)
+
+In Table \@ref(tab:tornado-state), Texas is the state that has been hit the most by Tornadoes—followed by Kansas, Alabama, Missouri, and Minnesota. The top four states have experienced Tornadoes on an EF4 scale from 2017 to 2019. The table style use `kableExtra` package. @kableExtra
+
+```{r tornado-state}
+storm_all %>% filter(EVENT_TYPE %in% c("Tornado")) %>%
+  group_by(STATE, TOR_F_SCALE) %>%
+  tally() %>%
+  pivot_wider(names_from = TOR_F_SCALE, values_from = n) %>%
+  arrange(desc(EF0)) %>%
+  head(5) %>%
+  kable(caption = "Tornado frequency by scale for each state in USA from 2017-2019") %>%
+  kableExtra::kable_styling(latex_options = "hold_position")
+```
+
+As the state with the highest number of tornadoes, we analyze Texas deeper. Figure \@ref(fig:tornado-texas) shows the number of tornadoes that occur overtime based on scale. In general, the number of tornadoes varies each year. EF0 occurs almost every year, but in 2019, the number of EF0 occurs more than 40 times in May. In 2018, the number of tornadoes on the EF1 and EF2 scales was less than in 2017 and 2019. The EF4 happened once in 2018.
+
+```{r tornado-texas, fig.cap= "Tornado scale per month in Texas", fig.width = 7, fig.height=3}
+storm_all %>% filter(EVENT_TYPE == "Tornado", STATE == "TEXAS") %>%
+  group_by(TOR_F_SCALE, MONTH_NAME, YEAR, STATE) %>%
+  tally() %>%
+  ggplot(aes(x=MONTH_NAME,
+             y = n, 
+             group= YEAR,
+             colour = YEAR))+
+  geom_line()+
+  geom_point()+
+  facet_wrap(~TOR_F_SCALE) +
+  theme(axis.text.x = element_text(angle = 90),
+        legend.position = "bottom") +
+  labs(x = "Month", y= "Total")
+```
+
+Figure \@ref(fig:tornado-texas-2019) tells what time of day a tornado with a particular scale occurs in Texas in 2019. Generally, there are differences in each month. May is the most prominent month with almost every day some tornadoes occur.
+
+```{r tornado-texas-2019, fig.cap= "Tornado by hour distribution that happened in Texas in 2019", fig.width = 7, fig.height=3.1}
+storm_all %>% filter(EVENT_TYPE == "Tornado", STATE == "TEXAS", YEAR == "2019") %>%
+  mutate(Time = hour(BEGIN_DATE_TIME)) %>%
+  group_by(MONTH_NAME, Time, TOR_WIDTH, TOR_F_SCALE) %>%
+  ggplot(aes(x=wday(BEGIN_DATE_TIME, label=TRUE),
+             y=Time,
+             colour=TOR_F_SCALE)) +
+  geom_point() +
+  facet_wrap(~MONTH_NAME, ncol = 4,
+             labeller = labeller(MONTH_NAME = label_wrap_gen(20))) +
+  theme(axis.text.x = element_text(angle = 90, vjust = 0.3),
+        legend.position = "bottom") +
+  labs(x = "Days", y = "Time")
+```
+
 \clearpage
 
 # Conclusion
@@ -104,6 +213,4 @@ storm_all <- rbind(storm17,storm18,storm19)
 # Citation examples
 
 [More styles for natbib here](https://www.overleaf.com/learn/latex/Natbib_bibliography_styles)
-
-
- @BC64 and this is another article about COVID @bai2020presumed and I can also cite R packages as follows @ggplot2
+@ggplot2
