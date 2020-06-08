@@ -77,6 +77,18 @@ storm_all <- rbind(storm17,storm18,storm19)
 
 \clearpage
 
+# Data
+
+## Data source
+
+We download the dataset from Storm Events Database data set which contains 31 variables and 187139 observations in total from NOAA <https://www.ncdc.noaa.gov/stormevents/>.
+
+## Data limitation
+
+One of the defects of this dataset is that there is no further division of the scale of disasters, because the losses, casualties and even distribution areas caused by disasters of different scales are different, for example, it is quite difficult to distinguish between small versus large hail through this dataset. So, if there is a further division of the scale of disasters, it will be more conducive to analysis.
+
+\clearpage
+
 # Methodology
 
 \clearpage
