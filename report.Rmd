@@ -94,14 +94,14 @@ storm_all <- rbind(storm17,storm18,storm19)
 ## The trend of occurence of the event changing by year in each state
 
 In this section, the main purpose is to explore the trend of occurence of the top 5 frequent events changing by year both across the whole USA and in each state. First, create a table and group the data by "STATE" and "YEAR". Then count the times of occurence for all events and rename the name of this column as "FREQ" to present the frequency. And next, create a new table to arrange the data by descending order with displaying the top 5 events that happen most frequently. Then, use "right_join" to connect these two tables. Finally, create two figures to display the trend of occurence of the top 5 event changing by year.
-```{r frequencytrend}
+```{r frequencytrend, echo = FALSE}
 storm_frequency_state <- storm_all %>%
   group_by(STATE, YEAR) %>%
   count(EVENT_TYPE) %>%
   rename(FREQ = n) 
 ```
 
-```{r frequencytrendnew}
+```{r frequencytrendnew, echo = FALSE}
 storm_frequency_state_new <- storm_all %>%
   group_by(EVENT_TYPE) %>%
   count(EVENT_TYPE) %>%
@@ -111,12 +111,12 @@ storm_frequency_state_new <- storm_all %>%
   select(EVENT_TYPE)
 ```
 
-```{r topnewtable}
+```{r topnewtable, echo = FALSE}
 top5_newtable <- right_join(storm_frequency_state, storm_frequency_state_new, by = "EVENT_TYPE") %>%
   group_by(STATE)
 ```
 
-```{r  frequencyplot,fig.height = 30, fig.width= 30}
+```{r  frequencyplot,fig.height = 30, fig.width= 30, echo = FALSE}
 ggplot(top5_newtable,
        aes(x= YEAR, 
            y = FREQ, group = EVENT_TYPE, color = EVENT_TYPE)) +
@@ -128,7 +128,7 @@ ggplot(top5_newtable,
   )
 ```
 
-```{r  frequencyplot2,fig.width= 25, fig.height= 35}
+```{r  frequencyplot2,fig.width= 25, fig.height= 35, echo = FALSE}
 ggplot(top5_newtable,
        aes(x= YEAR, 
            y = FREQ, group = EVENT_TYPE, color = EVENT_TYPE)) +
