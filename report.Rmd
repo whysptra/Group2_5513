@@ -40,6 +40,8 @@ library(knitr)
 library(readr)
 library(lubridate)
 library(bookdown)
+library(kableExtra)
+library(gridExtra)
 theme_set(theme_minimal())
 ```
 
@@ -101,6 +103,16 @@ storm_frequency_state <- storm_all %>%
   rename(FREQ = n) 
 ```
 
+```{r tablefrequency, echo = FALSE}
+kable(storm_frequency_state[1:10,],
+      booktabs = TRUE, 
+      caption = "The frequency of the events") %>%
+  kable_styling(bootstrap_options = c("striped", "hover"), 
+                full_width = F,
+                latex_options = c("hold_position"))
+```
+
+
 ```{r frequencytrendnew, echo = FALSE}
 storm_frequency_state_new <- storm_all %>%
   group_by(EVENT_TYPE) %>%
@@ -111,9 +123,27 @@ storm_frequency_state_new <- storm_all %>%
   select(EVENT_TYPE)
 ```
 
+```{r tablefrequencynew, echo = FALSE}
+kable(storm_frequency_state_new[1:5,],
+      booktabs = TRUE, 
+      caption = "Top five most frequent events") %>%
+  kable_styling(bootstrap_options = c("striped", "hover"), 
+                full_width = F,
+                latex_options = c("hold_position"))
+```
+
 ```{r topnewtable, echo = FALSE}
 top5_newtable <- right_join(storm_frequency_state, storm_frequency_state_new, by = "EVENT_TYPE") %>%
   group_by(STATE)
+```
+
+```{r rightjointable, echo = FALSE}
+kable(top5_newtable[1:10,],
+      booktabs = TRUE, 
+      caption = "Occurence of top five most frequent events") %>%
+  kable_styling(bootstrap_options = c("striped", "hover"), 
+                full_width = F,
+                latex_options = c("hold_position"))
 ```
 
 ```{r  frequencyplot,fig.height = 30, fig.width= 30, echo = FALSE}
@@ -124,7 +154,11 @@ ggplot(top5_newtable,
   scale_y_log10() +
   theme(
   legend.title = element_text(color = "blue", size = 60),
-  legend.text = element_text(color = "green", size = 60)
+  legend.text = element_text(color = "green", size = 60),
+  axis.title.x = element_text(size = 40),
+  axis.title.y = element_text(size = 40),
+  axis.text.x = element_text(size = 30),
+  axis.text.y = element_text(size = 30)
   )
 ```
 
@@ -137,9 +171,15 @@ ggplot(top5_newtable,
   scale_y_log10() +
   theme(
   legend.title = element_text(color = "blue", size = 60),
-  legend.text = element_text(color = "green", size = 60)
+  legend.text = element_text(color = "green", size = 60),
+  axis.title.x = element_text(size = 40),
+  axis.title.y = element_text(size = 40),
+  axis.text.y = element_text(size = 30)
   )
 ```
+
+Table \@ref(tab:tablefrequency) displays the first ten lines of the frequency of all events. And Table \@ref(tab:tablefrequencynew) displays the top five most frequent events. And Table \@ref(tab:rightjointable) displays the first ten lines of the final results of the occurence of top five most frequent events. It can be seen that top 5 events have occurred in some regions in three years for example, thunderstorm wind has occurred in Alabama in three yearsfrom 495 times to 630 times , while it has only occurred twice in Alaska in 2019.
+Figure \@ref(fig:frequencyplot) presents the occurence of top five most frequent events across the whole USA, we could see that thunderstorm wind showed an increasing trend during three years. And hail showed a slow growth in 2017-2018, followed by a sharp decline in 2018-2019. As for the winter weather, it has been on a downward trend for three years, but the slowdown from 2017 to 2018 was larger than that from 2018 to 2019. What's more, flash flood kept growing, but slowed down between 2018 and 2019. At last, flood kept a slow decline at first, then turned into a significant rise.
 
 \clearpage
 
