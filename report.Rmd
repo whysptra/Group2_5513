@@ -93,9 +93,9 @@ storm_all <- rbind(storm17,storm18,storm19)
 
 # Section 3
 
-## The trend of occurence of the event changing by year in each state
+## The trend of occurence of the top five most frequent events changing by year 
 
-In this section, the main purpose is to explore the trend of occurence of the top 5 frequent events changing by year both across the whole USA and in each state. First, create a table and group the data by "STATE" and "YEAR". Then count the times of occurence for all events and rename the name of this column as "FREQ" to present the frequency. And next, create a new table to arrange the data by descending order with displaying the top 5 events that happen most frequently. Then, use "right_join" to connect these two tables. Finally, create two figures to display the trend of occurence of the top 5 event changing by year.
+In this section, the main purpose is to explore the trend of occurence of the top five most frequent events changing by year both across the whole USA and in each state. First, create a table and group the data by "STATE" and "YEAR". Then count the times of occurence for all events and rename the name of this column as "FREQ" to present the frequency. And next, create a new table to arrange the data by descending order with displaying the top 5 events that happen most frequently. Then, use "right_join" to connect these two tables. Finally, create two figures to display the trend of occurence of the top 5 event changing by year.
 ```{r frequencytrend, echo = FALSE}
 storm_frequency_state <- storm_all %>%
   group_by(STATE, YEAR) %>%
@@ -162,21 +162,6 @@ ggplot(top5_newtable,
   )
 ```
 
-```{r  frequencyplot2,fig.width= 25, fig.height= 35, echo = FALSE}
-ggplot(top5_newtable,
-       aes(x= YEAR, 
-           y = FREQ, group = EVENT_TYPE, color = EVENT_TYPE)) +
-  geom_line() +
-  facet_wrap(~STATE) +
-  scale_y_log10() +
-  theme(
-  legend.title = element_text(color = "blue", size = 60),
-  legend.text = element_text(color = "green", size = 60),
-  axis.title.x = element_text(size = 40),
-  axis.title.y = element_text(size = 40),
-  axis.text.y = element_text(size = 30)
-  )
-```
 
 Table \@ref(tab:tablefrequency) displays the first ten lines of the frequency of all events. And Table \@ref(tab:tablefrequencynew) displays the top five most frequent events. And Table \@ref(tab:rightjointable) displays the first ten lines of the final results of the occurence of top five most frequent events. It can be seen that top 5 events have occurred in some regions in three years for example, thunderstorm wind has occurred in Alabama in three yearsfrom 495 times to 630 times , while it has only occurred twice in Alaska in 2019.
 Figure \@ref(fig:frequencyplot) presents the occurence of top five most frequent events across the whole USA, we could see that thunderstorm wind showed an increasing trend during three years. And hail showed a slow growth in 2017-2018, followed by a sharp decline in 2018-2019. As for the winter weather, it has been on a downward trend for three years, but the slowdown from 2017 to 2018 was larger than that from 2018 to 2019. What's more, flash flood kept growing, but slowed down between 2018 and 2019. At last, flood kept a slow decline at first, then turned into a significant rise.
