@@ -40,6 +40,7 @@ library(knitr)
 library(readr)
 library(lubridate)
 library(bookdown)
+library(ggplot2)
 ```
 
 ```{r cleaning-data}
@@ -75,6 +76,16 @@ storm_all <- rbind(storm17,storm18,storm19)
 \clearpage
 
 # Methodology
+
+- This project is a descriptive research aiming at virualising and analysing the storms and other significant weather phenomena.
+
+- Use @lubridate package to covert the date and time columns to proper format.
+
+- Use select function to choose variables for later analysis. 
+
+- Use rbind function to bind the data of different years.
+
+_ Use @ggplot2 package to create plots.
 
 \clearpage
 
@@ -140,7 +151,6 @@ Figure \@ref(fig:fig3) shows the direct injuries of each state through 2017 to 2
 storm_all %>% 
   group_by(YEAR, STATE) %>% 
   mutate(injury_tot_state = sum(INJURIES_DIRECT)) %>% 
-  arrange(injury_tot_state) %>% 
   ggplot(aes(x = STATE, y = injury_tot_state, fill = STATE)) + 
   geom_col(position = "dodge") + 
   coord_flip() + 
