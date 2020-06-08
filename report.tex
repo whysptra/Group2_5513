@@ -82,6 +82,15 @@
 \newcommand{\VariableTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
 \newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
 \newcommand{\WarningTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\usepackage{longtable,booktabs}
+% Correct order of tables after \paragraph or \subparagraph
+\usepackage{etoolbox}
+\makeatletter
+\patchcmd\longtable{\par}{\if@noskipsec\mbox{}\fi\par}{}{}
+\makeatother
+% Allow footnotes in longtable head/foot
+\IfFileExists{footnotehyper.sty}{\usepackage{footnotehyper}}{\usepackage{footnote}}
+\makesavenoteenv{longtable}
 \usepackage{graphicx,grffile}
 \makeatletter
 \def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth\else\Gin@nat@width\fi}
@@ -125,7 +134,7 @@
 \usepackage{makecell}
 \usepackage{xcolor}
 \usepackage[]{natbib}
-\bibliographystyle{dinat}
+\bibliographystyle{plainnat}
 
 \title{Assignment 4 ETC5513}
 \usepackage{etoolbox}
@@ -217,12 +226,18 @@
 \clearpage
 
 \hypertarget{section-4-injuries-and-deaths}{%
-\section{Section 4: Injuries and
-Deaths}\label{section-4-injuries-and-deaths}}
+\section{Section 4: Injuries and Deaths}\label{section-4-injuries-and-deaths}}
+
+This section will focus on the injuries and deaths caused by the storm events and other unusual weather phenomena across the US from 2017 to 2019.
 
 \hypertarget{direct-injuries-and-deaths-by-month-and-year}{%
-\subsection{Direct injuries and deaths by month and
-year}\label{direct-injuries-and-deaths-by-month-and-year}}
+\subsection{Direct injuries and deaths by month and year}\label{direct-injuries-and-deaths-by-month-and-year}}
+
+Figure \ref{fig:fig1} and \ref{fig:fig2} shows the total direct injuries and deaths of the storm events by month.
+
+Over all the years, there are less direct injuries of storm events from September to December, while more direct injuries happened on January June and July. Most direct deaths happened on January, June to September and November.
+
+There are several noticeable time periods. First, there are over 500 injuries and over 200 deaths on July 2018. Second, over 100 deaths happened on November 2018.
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -241,7 +256,7 @@ year}\label{direct-injuries-and-deaths-by-month-and-year}}
 \begin{figure}
 \centering
 \includegraphics{report_files/figure-latex/fig1-1.pdf}
-\caption{Total direct injuries by month}
+\caption{\label{fig:fig1}Total direct injuries by month}
 \end{figure}
 
 \begin{Shaded}
@@ -261,18 +276,22 @@ year}\label{direct-injuries-and-deaths-by-month-and-year}}
 \begin{figure}
 \centering
 \includegraphics{report_files/figure-latex/fig2-1.pdf}
-\caption{Total direct deaths by month}
+\caption{\label{fig:fig2}Total direct deaths by month}
 \end{figure}
 
+\clearpage
+
 \hypertarget{direct-injuries-and-deaths-by-state}{%
-\subsection{Direct injuries and deaths by
-state}\label{direct-injuries-and-deaths-by-state}}
+\subsection{Direct injuries and deaths by state}\label{direct-injuries-and-deaths-by-state}}
+
+Figure \ref{fig:fig3} shows the direct injuries of each state through 2017 to 2019. In 2017, Georgia had over 150 direct injuries which is the most among all the states. In 2018, California had over 350 direct injuries which is the most among all the states. Meanwhile, Oklahoma and Missouri also had over 200 direct injuries. The most injuries in 2019 happened in Ohio, with over 200 injuries.
 
 \begin{Shaded}
 \begin{Highlighting}[]
 \NormalTok{storm_all }\OperatorTok{%>%}\StringTok{ }
 \StringTok{  }\KeywordTok{group_by}\NormalTok{(YEAR, STATE) }\OperatorTok{%>%}\StringTok{ }
 \StringTok{  }\KeywordTok{mutate}\NormalTok{(}\DataTypeTok{injury_tot_state =} \KeywordTok{sum}\NormalTok{(INJURIES_DIRECT)) }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\KeywordTok{arrange}\NormalTok{(injury_tot_state) }\OperatorTok{%>%}\StringTok{ }
 \StringTok{  }\KeywordTok{ggplot}\NormalTok{(}\KeywordTok{aes}\NormalTok{(}\DataTypeTok{x =}\NormalTok{ STATE, }\DataTypeTok{y =}\NormalTok{ injury_tot_state, }\DataTypeTok{fill =}\NormalTok{ STATE)) }\OperatorTok{+}\StringTok{ }
 \StringTok{  }\KeywordTok{geom_col}\NormalTok{(}\DataTypeTok{position =} \StringTok{"dodge"}\NormalTok{) }\OperatorTok{+}\StringTok{ }
 \StringTok{  }\KeywordTok{coord_flip}\NormalTok{() }\OperatorTok{+}\StringTok{ }
@@ -280,15 +299,19 @@ state}\label{direct-injuries-and-deaths-by-state}}
 \StringTok{  }\KeywordTok{guides}\NormalTok{(}\DataTypeTok{fill=}\OtherTok{FALSE}\NormalTok{) }\OperatorTok{+}\StringTok{ }
 \StringTok{  }\KeywordTok{ggtitle}\NormalTok{(}\StringTok{"Total direct injuries by state"}\NormalTok{) }\OperatorTok{+}\StringTok{ }
 \StringTok{  }\KeywordTok{theme}\NormalTok{(}\DataTypeTok{axis.text.x =} \KeywordTok{element_text}\NormalTok{(}\DataTypeTok{size=}\DecValTok{12}\NormalTok{), }
-        \DataTypeTok{axis.text.y =} \KeywordTok{element_text}\NormalTok{(}\DataTypeTok{size=}\DecValTok{2}\NormalTok{))}
+        \DataTypeTok{axis.text.y =} \KeywordTok{element_text}\NormalTok{(}\DataTypeTok{size=}\DecValTok{6}\NormalTok{)) }
 \end{Highlighting}
 \end{Shaded}
 
 \begin{figure}
 \centering
 \includegraphics{report_files/figure-latex/fig3-1.pdf}
-\caption{Total direct injuries by state}
+\caption{\label{fig:fig3}Total direct injuries by state}
 \end{figure}
+
+\clearpage
+
+Figure \ref{fig:fig4} shows the direct deaths of each state through 2017 to 2019. In 2017, Texas had about 100 direct deaths, which is the most among all the states. In 2018, Arizona had over 150 direct deaths and California had about 150 direct deaths, which are more than other states. In 2019, no state had more than 50 direct deaths, and Texas is slightly higher than others.
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -302,19 +325,22 @@ state}\label{direct-injuries-and-deaths-by-state}}
 \StringTok{  }\KeywordTok{guides}\NormalTok{(}\DataTypeTok{fill=}\OtherTok{FALSE}\NormalTok{) }\OperatorTok{+}\StringTok{ }
 \StringTok{  }\KeywordTok{ggtitle}\NormalTok{(}\StringTok{"Total direct deaths by state"}\NormalTok{) }\OperatorTok{+}\StringTok{ }
 \StringTok{  }\KeywordTok{theme}\NormalTok{(}\DataTypeTok{axis.text.x =} \KeywordTok{element_text}\NormalTok{(}\DataTypeTok{size=}\DecValTok{12}\NormalTok{), }
-        \DataTypeTok{axis.text.y =} \KeywordTok{element_text}\NormalTok{(}\DataTypeTok{size=}\DecValTok{2}\NormalTok{))}
+        \DataTypeTok{axis.text.y =} \KeywordTok{element_text}\NormalTok{(}\DataTypeTok{size=}\DecValTok{6}\NormalTok{))}
 \end{Highlighting}
 \end{Shaded}
 
 \begin{figure}
 \centering
 \includegraphics{report_files/figure-latex/fig4-1.pdf}
-\caption{Total direct deaths by state}
+\caption{\label{fig:fig4}Total direct deaths by state}
 \end{figure}
 
+\clearpage
+
 \hypertarget{direct-injuries-and-deaths-by-major-event-type}{%
-\subsection{Direct injuries and deaths by major event
-type}\label{direct-injuries-and-deaths-by-major-event-type}}
+\subsection{Direct injuries and deaths by major event type}\label{direct-injuries-and-deaths-by-major-event-type}}
+
+Table \ref{tab:tab1} shows the top 5 types of events with most direct injuries from 2017 to 2019. And figure \ref{fig:fig5} shows the injuries they caused every year. Tornado caused most direct injuries in 2017 and 2019, while heat caused more direct injuries than other types of events in 2018.
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -370,8 +396,12 @@ Excessive Heat & 306\\
 \begin{figure}
 \centering
 \includegraphics{report_files/figure-latex/fig5-1.pdf}
-\caption{Total direct injuries by event type}
+\caption{\label{fig:fig5}Total direct injuries by event type}
 \end{figure}
+
+\clearpage
+
+Table \ref{tab:tab2} shows the top 5 types of events with most direct deaths from 2017 to 2019. And figure \ref{fig:fig6} shows the deaths they caused every year. Excessive Heat caused most direct deaths among the five major event types in 2018, while flash flood caused slightly more direct deaths in 2017 and 2019. In addition, direct deaths caused by wildfire is decreasing in this time period.
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -427,7 +457,7 @@ Rip Current & 179\\
 \begin{figure}
 \centering
 \includegraphics{report_files/figure-latex/fig6-1.pdf}
-\caption{Total direct deaths by event type}
+\caption{\label{fig:fig6}Total direct deaths by event type}
 \end{figure}
 
 \clearpage
@@ -440,12 +470,9 @@ Rip Current & 179\\
 \hypertarget{citation-examples}{%
 \section{Citation examples}\label{citation-examples}}
 
-\href{https://www.overleaf.com/learn/latex/Natbib_bibliography_styles}{More
-styles for natbib here}
+\href{https://www.overleaf.com/learn/latex/Natbib_bibliography_styles}{More styles for natbib here}
 
-\citet{BC64} and this is another article about COVID
-\citet{bai2020presumed} and I can also cite R packages as follows
-\citet{ggplot2}
+\citet{BC64} and this is another article about COVID \citet{bai2020presumed} and I can also cite R packages as follows \citet{ggplot2}
 
   \bibliography{references.bib}
 

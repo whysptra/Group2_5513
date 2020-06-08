@@ -2,7 +2,7 @@
 title: "Assignment 4 ETC5513"
 author: "Yan Ma"
 output:
-  pdf_document:
+  bookdown::pdf_document2:
     citation_package: natbib
     highlight: tango
     number_sections: yes
@@ -13,7 +13,7 @@ output:
     toc: yes
     toc_depth: '2'
 bibliography: references.bib 
-biblio-style: dinat
+biblio-style: plainnat
 subtitle: Team name
 header-includes:
 - \usepackage{titling}
@@ -95,7 +95,15 @@ storm_all <- rbind(storm17,storm18,storm19)
 
 # Section 4: Injuries and Deaths
 
+This section will focus on the injuries and deaths caused by the storm events and other unusual weather phenomena across the US from 2017 to 2019.
+
 ## Direct injuries and deaths by month and year
+
+Figure \@ref(fig:fig1) and \@ref(fig:fig2) shows the total direct injuries and deaths of the storm events by month. 
+
+Over all the years, there are less direct injuries of storm events from September to December, while more direct injuries happened on January June and July. Most direct deaths happened on January, June to September and November.
+
+There are several noticeable time periods. First, there are over 500 injuries and over 200 deaths on July 2018. Second, over 100 deaths happened on November 2018.  
 
 ```{r fig1, fig.cap = "Total direct injuries by month"}
 storm_all %>% 
@@ -121,12 +129,18 @@ storm_all %>%
   ggtitle("Total direct deaths by month")
 ```
 
+\clearpage
+
 ## Direct injuries and deaths by state
+
+Figure \@ref(fig:fig3) shows the direct injuries of each state through 2017 to 2019. In 2017, Georgia had over 150 direct injuries which is the most among all the states. In 2018, California had over 350 direct injuries which is the most among all the states. Meanwhile, Oklahoma and Missouri also had over 200 direct injuries. The most injuries in 2019 happened in Ohio, with over 200 injuries.
+
 
 ```{r fig3, fig.cap = "Total direct injuries by state", fig.height=8}
 storm_all %>% 
   group_by(YEAR, STATE) %>% 
   mutate(injury_tot_state = sum(INJURIES_DIRECT)) %>% 
+  arrange(injury_tot_state) %>% 
   ggplot(aes(x = STATE, y = injury_tot_state, fill = STATE)) + 
   geom_col(position = "dodge") + 
   coord_flip() + 
@@ -134,8 +148,13 @@ storm_all %>%
   guides(fill=FALSE) + 
   ggtitle("Total direct injuries by state") + 
   theme(axis.text.x = element_text(size=12), 
-        axis.text.y = element_text(size=2))
+        axis.text.y = element_text(size=6)) 
 ```
+
+\clearpage
+
+Figure \@ref(fig:fig4) shows the direct deaths of each state through 2017 to 2019. In 2017, Texas had about 100 direct deaths, which is the most among all the states. In 2018, Arizona had over 150 direct deaths and California had about 150 direct deaths, which are more than other states. In 2019, no state had more than 50 direct deaths, and Texas is slightly higher than others.
+
 
 ```{r fig4, fig.cap = "Total direct deaths by state", fig.height=8}
 storm_all %>% 
@@ -148,10 +167,15 @@ storm_all %>%
   guides(fill=FALSE) + 
   ggtitle("Total direct deaths by state") + 
   theme(axis.text.x = element_text(size=12), 
-        axis.text.y = element_text(size=2))
+        axis.text.y = element_text(size=6))
 ```
 
+\clearpage
+
+
 ## Direct injuries and deaths by major event type
+
+Table \@ref(tab:tab1) shows the top 5 types of events with most direct injuries from 2017 to 2019. And figure \@ref(fig:fig5) shows the injuries they caused every year. Tornado caused most direct injuries in 2017 and 2019, while heat caused more direct injuries than other types of events in 2018.
 
 ```{r tab1, tab.cap = "Major event types cause direct injuries over years"}
 library(kableExtra)
@@ -179,6 +203,10 @@ storm_all %>%
   theme(axis.text.x = element_text(angle=90, hjust=1))
 ```
 
+\clearpage
+
+Table \@ref(tab:tab2) shows the top 5 types of events with most direct deaths from 2017 to 2019. And figure \@ref(fig:fig6) shows the deaths they caused every year. Excessive Heat caused most direct deaths among the five major event types in 2018, while flash flood caused slightly more direct deaths in 2017 and 2019. In addition, direct deaths caused by wildfire is decreasing in this time period. 
+
 ```{r tab2, tab.cap = "Major event types cause deaths over years"}
 library(kableExtra)
 storm_all %>% 
@@ -205,9 +233,17 @@ storm_all %>%
   theme(axis.text.x = element_text(angle=90, hjust=1))
 ```
 
+
 \clearpage
 
 # Conclusion
+
+Over all the years, there are less direct injuries of storm events from September to December, while more direct injuries happened on January June and July. Most direct deaths happened on January, June to September and November.
+
+In 2017, Georgia had the most direct injuries and Texas had the most direct deaths among all the states. In 2018, California had the most direct injuries and Arizona had the most direct deaths among all the states. In 2019, no state had more than 50 direct deaths, and Texas is slightly higher than others while Ohio had the most direct injuries. 
+
+Tornado caused most injuries in 2017 and 2019, while heat caused more injuries than other types of events in 2018. Excessive Heat caused most direct deaths among the five major event types in 2018, while flash flood caused slightly more direct deaths in 2017 and 2019. In addition, direct deaths caused by wildfire is decreasing in this time period.
+
 
 \clearpage
 
