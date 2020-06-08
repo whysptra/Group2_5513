@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.21 (TeX Live 2020) (preloaded format=pdflatex 2020.6.7)  8 JUN 2020 20:05
+This is pdfTeX, Version 3.14159265-2.6-1.40.21 (TeX Live 2020) (preloaded format=pdflatex 2020.6.7)  8 JUN 2020 21:37
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -878,41 +878,137 @@ s
 \f@nch@O@erf=\skip68
 \f@nch@O@olf=\skip69
 \f@nch@O@orf=\skip70
+) (/Users/a517/Library/TinyTeX/texmf-dist/tex/latex/tools/array.sty
+Package: array 2019/08/31 v2.4l Tabular extension package (FMi)
+\col@sep=\dimen291
+\ar@mcellbox=\box79
+\extrarowheight=\dimen292
+\NC@list=\toks42
+\extratabsurround=\skip71
+\backup@length=\skip72
+\ar@cellbox=\box80
+) (/Users/a517/Library/TinyTeX/texmf-dist/tex/latex/multirow/multirow.sty
+Package: multirow 2019/05/31 v2.5 Span multiple rows of a table
+\multirow@colwidth=\skip73
+\multirow@cntb=\count323
+\multirow@dima=\skip74
+\bigstrutjot=\dimen293
+) (/Users/a517/Library/TinyTeX/texmf-dist/tex/latex/wrapfig/wrapfig.sty
+\wrapoverhang=\dimen294
+\WF@size=\dimen295
+\c@WF@wrappedlines=\count324
+\WF@box=\box81
+\WF@everypar=\toks43
+Package: wrapfig 2003/01/31  v 3.6
+) (/Users/a517/Library/TinyTeX/texmf-dist/tex/latex/float/float.sty
+Package: float 2001/11/08 v1.3d Float enhancements (AL)
+\c@float@type=\count325
+\float@exts=\toks44
+\float@box=\box82
+\@float@everytoks=\toks45
+\@floatcapt=\box83
+) (/Users/a517/Library/TinyTeX/texmf-dist/tex/latex/colortbl/colortbl.sty
+Package: colortbl 2020/01/04 v1.0e Color table columns (DPC)
+\everycr=\toks46
+\minrowclearance=\skip75
+) (/Users/a517/Library/TinyTeX/texmf-dist/tex/latex/pdflscape/pdflscape.sty
+Package: pdflscape 2019/12/05 v0.12 Display of landscape pages in PDF (HO)
+(/Users/a517/Library/TinyTeX/texmf-dist/tex/latex/graphics/lscape.sty
+Package: lscape 2000/10/22 v3.01 Landscape Pages (DPC)
+)
+Package pdflscape Info: Auto-detected driver: pdftex on input line 81.
+) (/Users/a517/Library/TinyTeX/texmf-dist/tex/latex/tabu/tabu.sty
+Package: tabu 2019/01/11 v2.9 - flexible LaTeX tabulars (FC+tabu-fixed)
+(/Users/a517/Library/TinyTeX/texmf-dist/tex/latex/varwidth/varwidth.sty
+Package: varwidth 2009/03/30 ver 0.92;  Variable-width minipages
+\@vwid@box=\box84
+\sift@deathcycles=\count326
+\@vwid@loff=\dimen296
+\@vwid@roff=\dimen297
+)
+\c@taburow=\count327
+\tabu@nbcols=\count328
+\tabu@cnt=\count329
+\tabu@Xcol=\count330
+\tabu@alloc=\count331
+\tabu@nested=\count332
+\tabu@target=\dimen298
+\tabu@spreadtarget=\dimen299
+\tabu@naturalX=\dimen300
+\tabucolX=\dimen301
+\tabu@Xsum=\dimen302
+\extrarowdepth=\dimen303
+\abovetabulinesep=\dimen304
+\belowtabulinesep=\dimen305
+\tabustrutrule=\dimen306
+\tabu@thebody=\toks47
+\tabu@footnotes=\toks48
+\tabu@box=\box85
+\tabu@arstrutbox=\box86
+\tabu@hleads=\box87
+\tabu@vleads=\box88
+\tabu@cellskip=\skip76
+)
+(/Users/a517/Library/TinyTeX/texmf-dist/tex/latex/threeparttable/threeparttable
+.sty
+Package: threeparttable 2003/06/13  v 3.0
+\@tempboxb=\box89
+)
+(/Users/a517/Library/TinyTeX/texmf-dist/tex/latex/threeparttablex/threeparttabl
+ex.sty
+Package: threeparttablex 2013/07/23 v0.3 by daleif
+\TPTL@width=\skip77
+) (/Users/a517/Library/TinyTeX/texmf-dist/tex/generic/ulem/ulem.sty
+\UL@box=\box90
+\UL@hyphenbox=\box91
+\UL@skip=\skip78
+\UL@hook=\toks49
+\UL@height=\dimen307
+\UL@pe=\count333
+\UL@pixel=\dimen308
+\ULC@box=\box92
+Package: ulem 2019/11/18
+\ULdepth=\dimen309
+) (/Users/a517/Library/TinyTeX/texmf-dist/tex/latex/makecell/makecell.sty
+Package: makecell 2009/08/03 V0.1e Managing of Tab Column Heads and Cells
+\rotheadsize=\dimen310
+\c@nlinenum=\count334
+\TeXr@lab=\toks50
 ) (/Users/a517/Library/TinyTeX/texmf-dist/tex/latex/natbib/natbib.sty
 Package: natbib 2010/09/13 8.31b (PWD, AO)
-\bibhang=\skip71
-\bibsep=\skip72
+\bibhang=\skip79
+\bibsep=\skip80
 LaTeX Info: Redefining \cite on input line 694.
-\c@NAT@ctr=\count323
+\c@NAT@ctr=\count335
 ) (./report.aux)
 \openout1 = `report.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 135.
-LaTeX Font Info:    ... okay on input line 135.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 135.
-LaTeX Font Info:    ... okay on input line 135.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 135.
-LaTeX Font Info:    ... okay on input line 135.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 135.
-LaTeX Font Info:    ... okay on input line 135.
-LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 135.
-LaTeX Font Info:    ... okay on input line 135.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 135.
-LaTeX Font Info:    ... okay on input line 135.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 135.
-LaTeX Font Info:    ... okay on input line 135.
-LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 135.
-LaTeX Font Info:    ... okay on input line 135.
-LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 135.
-LaTeX Font Info:    ... okay on input line 135.
-LaTeX Info: Redefining \microtypecontext on input line 135.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 149.
+LaTeX Font Info:    ... okay on input line 149.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 149.
+LaTeX Font Info:    ... okay on input line 149.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 149.
+LaTeX Font Info:    ... okay on input line 149.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 149.
+LaTeX Font Info:    ... okay on input line 149.
+LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 149.
+LaTeX Font Info:    ... okay on input line 149.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 149.
+LaTeX Font Info:    ... okay on input line 149.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 149.
+LaTeX Font Info:    ... okay on input line 149.
+LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 149.
+LaTeX Font Info:    ... okay on input line 149.
+LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 149.
+LaTeX Font Info:    ... okay on input line 149.
+LaTeX Info: Redefining \microtypecontext on input line 149.
 Package microtype Info: Generating PDF output.
 Package microtype Info: Character protrusion enabled (level 2).
 Package microtype Info: Using protrusion set `basicmath'.
 Package microtype Info: Automatic font expansion enabled (level 2),
 (microtype)             stretch: 20, shrink: 20, step: 1, non-selected.
 Package microtype Info: Using default expansion set `basictext'.
-LaTeX Info: Redefining \showhyphens on input line 135.
+LaTeX Info: Redefining \showhyphens on input line 149.
 Package microtype Info: No adjustment of tracking.
 Package microtype Info: No adjustment of interword spacing.
 Package microtype Info: No adjustment of character kerning.
@@ -920,8 +1016,8 @@ Package microtype Info: No adjustment of character kerning.
 File: mt-cmr.cfg 2013/05/19 v2.2 microtype config. file: Computer Modern Roman 
 (RS)
 )
-\AtBeginShipoutBox=\box79
-Package hyperref Info: Link coloring OFF on input line 135.
+\AtBeginShipoutBox=\box93
+Package hyperref Info: Link coloring OFF on input line 149.
 (/Users/a517/Library/TinyTeX/texmf-dist/tex/latex/hyperref/nameref.sty
 Package: nameref 2019/09/16 v2.46 Cross-referencing by name of section
 (/Users/a517/Library/TinyTeX/texmf-dist/tex/latex/refcount/refcount.sty
@@ -931,11 +1027,11 @@ Package: refcount 2019/12/15 v3.6 Data extraction from label references (HO)
 ng.sty
 Package: gettitlestring 2019/12/15 v1.6 Cleanup title references (HO)
 )
-\c@section@level=\count324
+\c@section@level=\count336
 )
-LaTeX Info: Redefining \ref on input line 135.
-LaTeX Info: Redefining \pageref on input line 135.
-LaTeX Info: Redefining \nameref on input line 135.
+LaTeX Info: Redefining \ref on input line 149.
+LaTeX Info: Redefining \pageref on input line 149.
+LaTeX Info: Redefining \nameref on input line 149.
 (./report.out) (./report.out)
 \@outlinefile=\write7
 \openout7 = `report.out'.
@@ -984,47 +1080,47 @@ Package epstopdf-base Info: Redefining graphics rule for `.eps' on input line 4
 File: epstopdf-sys.cfg 2010/07/13 v1.3 Configuration of (r)epstopdf for TeX Liv
 e
 )) ABD: EveryShipout initializing macros
-\c@lstlisting=\count325
+\c@lstlisting=\count337
 <Images/sam-albury-oA7MMRxTVzo-unsplash.jpg, id=75, 4175.6pt x 3131.7pt>
 File: Images/sam-albury-oA7MMRxTVzo-unsplash.jpg Graphic file (type jpg)
 <use Images/sam-albury-oA7MMRxTVzo-unsplash.jpg>
 Package pdftex.def Info: Images/sam-albury-oA7MMRxTVzo-unsplash.jpg  used on in
-put line 136.
+put line 150.
 (pdftex.def)             Requested size: 361.32462pt x 270.99345pt.
 LaTeX Font Info:    Trying to load font information for OT1+lmr on input line 1
-36.
+50.
 (/Users/a517/Library/TinyTeX/texmf-dist/tex/latex/lm/ot1lmr.fd
 File: ot1lmr.fd 2009/10/30 v1.6 Font defs for Latin Modern
 )
 LaTeX Font Info:    Trying to load font information for OML+lmm on input line 1
-36.
+50.
 (/Users/a517/Library/TinyTeX/texmf-dist/tex/latex/lm/omllmm.fd
 File: omllmm.fd 2009/10/30 v1.6 Font defs for Latin Modern
 )
 LaTeX Font Info:    Trying to load font information for OMS+lmsy on input line 
-136.
+150.
 (/Users/a517/Library/TinyTeX/texmf-dist/tex/latex/lm/omslmsy.fd
 File: omslmsy.fd 2009/10/30 v1.6 Font defs for Latin Modern
 )
 LaTeX Font Info:    Trying to load font information for OMX+lmex on input line 
-136.
+150.
 (/Users/a517/Library/TinyTeX/texmf-dist/tex/latex/lm/omxlmex.fd
 File: omxlmex.fd 2009/10/30 v1.6 Font defs for Latin Modern
 )
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <12> on input line 136.
+(Font)              <12> on input line 150.
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <8> on input line 136.
+(Font)              <8> on input line 150.
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <6> on input line 136.
-LaTeX Font Info:    Trying to load font information for U+msa on input line 136
+(Font)              <6> on input line 150.
+LaTeX Font Info:    Trying to load font information for U+msa on input line 150
 .
 (/Users/a517/Library/TinyTeX/texmf-dist/tex/latex/amsfonts/umsa.fd
 File: umsa.fd 2013/01/14 v3.01 AMS symbols A
 ) (/Users/a517/Library/TinyTeX/texmf-dist/tex/latex/microtype/mt-msa.cfg
 File: mt-msa.cfg 2006/02/04 v1.1 microtype config. file: AMS symbols (a) (RS)
 )
-LaTeX Font Info:    Trying to load font information for U+msb on input line 136
+LaTeX Font Info:    Trying to load font information for U+msb on input line 150
 .
 (/Users/a517/Library/TinyTeX/texmf-dist/tex/latex/amsfonts/umsb.fd
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
@@ -1035,71 +1131,114 @@ File: mt-msb.cfg 2005/06/01 v1.0 microtype config. file: AMS symbols (b) (RS)
 \openout8 = `report.toc'.
 
 
-Package xcolor Warning: Incompatible color definition on input line 142.
+Package xcolor Warning: Incompatible color definition on input line 156.
 
 [1
 
 {/Users/a517/Library/TinyTeX/texmf-var/fonts/map/pdftex/updmap/pdftex.map} <./I
 mages/sam-albury-oA7MMRxTVzo-unsplash.jpg>]
 LaTeX Font Info:    Trying to load font information for T1+lmtt on input line 1
-43.
+57.
 (/Users/a517/Library/TinyTeX/texmf-dist/tex/latex/lm/t1lmtt.fd
 File: t1lmtt.fd 2009/10/30 v1.6 Font defs for Latin Modern
 )
 LaTeX Font Info:    Font shape `T1/lmtt/bx/n' in size <10> not available
-(Font)              Font shape `T1/lmtt/b/n' tried instead on input line 144.
+(Font)              Font shape `T1/lmtt/b/n' tried instead on input line 158.
 
-Package xcolor Warning: Incompatible color definition on input line 146.
-
-
-Package xcolor Warning: Incompatible color definition on input line 146.
+Package xcolor Warning: Incompatible color definition on input line 160.
 
 
-Package xcolor Warning: Incompatible color definition on input line 148.
+Package xcolor Warning: Incompatible color definition on input line 160.
 
 
-Package xcolor Warning: Incompatible color definition on input line 156.
+Package xcolor Warning: Incompatible color definition on input line 162.
 
 
-Package xcolor Warning: Incompatible color definition on input line 156.
+Package xcolor Warning: Incompatible color definition on input line 170.
 
 
-Package xcolor Warning: Incompatible color definition on input line 158.
+Package xcolor Warning: Incompatible color definition on input line 170.
 
 
-Package xcolor Warning: Incompatible color definition on input line 184.
+Package xcolor Warning: Incompatible color definition on input line 172.
 
 
-Package xcolor Warning: Incompatible color definition on input line 184.
+Package xcolor Warning: Incompatible color definition on input line 198.
+
+
+Package xcolor Warning: Incompatible color definition on input line 198.
 
 [2] [3
 
 ] [4
 
 ]
-<report_files/figure-latex/locationmap-1.pdf, id=113, 469.755pt x 325.215pt>
-File: report_files/figure-latex/locationmap-1.pdf Graphic file (type pdf)
-<use report_files/figure-latex/locationmap-1.pdf>
-Package pdftex.def Info: report_files/figure-latex/locationmap-1.pdf  used on i
-nput line 262.
+LaTeX Font Info:    External font `lmex10' loaded for size
+(Font)              <10> on input line 221.
+LaTeX Font Info:    External font `lmex10' loaded for size
+(Font)              <7> on input line 221.
+LaTeX Font Info:    External font `lmex10' loaded for size
+(Font)              <5> on input line 221.
+<Images/locationmap-1.pdf, id=116, 469.755pt x 325.215pt>
+File: Images/locationmap-1.pdf Graphic file (type pdf)
+<use Images/locationmap-1.pdf>
+Package pdftex.def Info: Images/locationmap-1.pdf  used on input line 275.
 (pdftex.def)             Requested size: 469.75386pt x 325.2142pt.
-<report_files/figure-latex/TWmonth-1.pdf, id=114, 469.755pt x 325.215pt>
-File: report_files/figure-latex/TWmonth-1.pdf Graphic file (type pdf)
-<use report_files/figure-latex/TWmonth-1.pdf>
-Package pdftex.def Info: report_files/figure-latex/TWmonth-1.pdf  used on input
- line 278.
+<Images/TWmonth-1.pdf, id=118, 469.755pt x 325.215pt>
+File: Images/TWmonth-1.pdf Graphic file (type pdf)
+<use Images/TWmonth-1.pdf>
+Package pdftex.def Info: Images/TWmonth-1.pdf  used on input line 286.
+(pdftex.def)             Requested size: 469.75386pt x 325.2142pt.
+
+LaTeX Warning: `!h' float specifier changed to `!ht'.
+
+<Images/monthplot-1.pdf, id=121, 469.755pt x 325.215pt>
+File: Images/monthplot-1.pdf Graphic file (type pdf)
+<use Images/monthplot-1.pdf>
+Package pdftex.def Info: Images/monthplot-1.pdf  used on input line 330.
 (pdftex.def)             Requested size: 469.75386pt x 325.2142pt.
 [5
 
-]
-<report_files/figure-latex/monthplot-1.pdf, id=123, 469.755pt x 325.215pt>
-File: report_files/figure-latex/monthplot-1.pdf Graphic file (type pdf)
-<use report_files/figure-latex/monthplot-1.pdf>
-Package pdftex.def Info: report_files/figure-latex/monthplot-1.pdf  used on inp
-ut line 323.
-(pdftex.def)             Requested size: 469.75386pt x 325.2142pt.
-[6] [7 <./report_files/figure-latex/locationmap-1.pdf>] [8 <./report_files/figu
-re-latex/TWmonth-1.pdf>] [9 <./report_files/figure-latex/monthplot-1.pdf>] [10
+pdfTeX warning (ext4): destination with the same identifier (name{table.1}) has
+ been already used, duplicate ignored
+
+\AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
+                                                  \fi \fi 
+l.337 \clearpage
+                pdfTeX warning (ext4): destination with the same identifier (na
+me{table.2}) has been already used, duplicate ignored
+
+\AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
+                                                  \fi \fi 
+l.337 \clearpage
+                ] [6pdfTeX warning (ext4): destination with the same identifier
+ (name{figure.1}) has been already used, duplicate ignored
+
+\AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
+                                                  \fi \fi 
+l.337 \clearpage
+                 <./Images/locationmap-1.pdf>] [7pdfTeX warning (ext4): destina
+tion with the same identifier (name{figure.2}) has been already used, duplicate
+ ignored
+
+\AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
+                                                  \fi \fi 
+l.337 \clearpage
+                 <./Images/TWmonth-1.pdf>] [8pdfTeX warning (ext4): destination
+ with the same identifier (name{figure.3}) has been already used, duplicate ign
+ored
+
+\AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
+                                                  \fi \fi 
+l.337 \clearpage
+                 <./Images/monthplot-1.pdf>] [9pdfTeX warning (ext4): destinati
+on with the same identifier (name{table.3}) has been already used, duplicate ig
+nored
+
+\AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
+                                                  \fi \fi 
+l.337 \clearpage
+                ] [10
 
 ] [11
 
@@ -1107,33 +1246,26 @@ re-latex/TWmonth-1.pdf>] [9 <./report_files/figure-latex/monthplot-1.pdf>] [10
 
 ] [13
 
-] (./report.bbl
-LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <10> on input line 26.
-LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <7> on input line 26.
-LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <5> on input line 26.
-) [14
+] (./report.bbl) [14
 
 ]
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 364.
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 364.
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 368.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 368.
 (./report.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 364.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 364.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 368.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 368.
 Package rerunfilecheck Info: File `report.out' has not changed.
 (rerunfilecheck)             Checksum: 4983F278D7C26C7C09D8E93957340BD3;789.
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 364.
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 368.
  ) 
 Here is how much of TeX's memory you used:
- 31372 strings out of 482401
- 597060 string characters out of 5946346
- 897345 words of memory out of 5000000
- 46482 multiletter control sequences out of 15000+600000
- 585258 words of font info for 92 fonts, out of 8000000 for 9000
+ 32652 strings out of 482401
+ 614711 string characters out of 5946346
+ 923831 words of memory out of 5000000
+ 47721 multiletter control sequences out of 15000+600000
+ 585032 words of font info for 89 fonts, out of 8000000 for 9000
  14 hyphenation exceptions out of 8191
- 64i,11n,103p,1008b,451s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 64i,11n,103p,1008b,354s stack positions out of 5000i,500n,10000p,200000b,80000s
 {/Users/a517/Library/TinyTeX/texmf-dist/fonts/enc/dvips/lm/lm-ec.enc}</Users/
 a517/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmbx10.pfb></Users/a517/L
 ibrary/TinyTeX/texmf-dist/fonts/type1/public/lm/lmbx12.pfb></Users/a517/Library
@@ -1145,10 +1277,10 @@ ype1/public/lm/lmro10.pfb></Users/a517/Library/TinyTeX/texmf-dist/fonts/type1/p
 ublic/lm/lmtk10.pfb></Users/a517/Library/TinyTeX/texmf-dist/fonts/type1/public/
 lm/lmtt10.pfb></Users/a517/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmt
 ti10.pfb>
-Output written on report.pdf (14 pages, 6422907 bytes).
+Output written on report.pdf (14 pages, 6423175 bytes).
 PDF statistics:
- 265 PDF objects out of 1000 (max. 8388607)
- 193 compressed objects within 2 object streams
+ 271 PDF objects out of 1000 (max. 8388607)
+ 199 compressed objects within 2 object streams
  42 named destinations out of 1000 (max. 500000)
  14577 words of extra memory for PDF output out of 17280 (max. 10000000)
 

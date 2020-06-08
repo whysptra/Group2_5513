@@ -2,7 +2,7 @@
 title: "Assignment 4 ETC5513"
 author: "XXXX"
 output:
-  pdf_document:
+  bookdown::pdf_document2:
     citation_package: natbib
     highlight: tango
     number_sections: yes
@@ -99,7 +99,8 @@ events_3years <- merge(merge(event19, event18, all=TRUE), event17, all=TRUE)%>%
   arrange(desc(count))%>%
   head(10)
 
-knitr::kable(events_3years, caption = "Top10 storm events in 3 years ")
+knitr::kable(events_3years, caption = "Top10 storm events in 3 years ")%>%
+  kableExtra::kable_styling(latex_options = "hold_position")
 ```
 
 Table \@ref(tab:countstb) shows the top 10 numbers of storm events happened  in America in 2019. first of all is thunderstorm wind happened 18617 times, after that is hail with 9013 cases and flood with 4949 cases and flash flood followed by 4072 cases. The other six are winter weather, high wind, winter storm, heavy snow, marine thunderstorm wind and tornado in order.
@@ -111,11 +112,12 @@ event_counts <- storm19 %>%
   arrange(desc(count))%>%
   head(5)
 
-knitr::kable(event_counts, caption = "Top5 storm event frequency in 2019")
+knitr::kable(event_counts, caption = "Top5 storm event frequency in 2019")%>%
+  kableExtra::kable_styling(latex_options = "hold_position")
 ```
 
 Figure  \@ref(fig:locationmap) shows the distributions of the most frequently happened five storm events' locations in 2019. It is clear to see that theses storm events happened more in eastern of America and some in the middle of America. 
-```{r locationmap, fig.cap = "Top5 storm event locations in 2019", echo=FALSE, fig.align = "center"}
+```{r locationmap, fig.cap = "Top5 storm event locations in 2019", fig.path = "Images/", echo=FALSE, fig.align = "center"}
 library(ggmap)
 library(ggthemes)
 library(ggplot2)
@@ -139,8 +141,8 @@ ggmap(usa_map) +
   theme_map()
 ```
 
-As for thunderstorm wind, Figure  \@ref(fig:TMmonth) shows the thunderstorm wind locations in America in 2019 of different months. It is clear to see that the most active months of thunderstorm wind were from May to August. Furthermore, the locations of theses events happened from middle and east of America slowly transformed to the east from July to October. 
-```{r TWmonth, fig.cap = "Thunderstorm locations by month in 2019", echo=FALSE, fig.align = "center"}
+Figure \@ref(fig:TWmonth) shows the thunderstorm wind locations in America in 2019 of different months. It is clear to see that the most active months of thunderstorm wind were from May to August. Furthermore, the locations of theses events happened from middle and east of America slowly transformed to the east from July to October. 
+```{r TWmonth, fig.cap = "Thunderstorm locations by month in 2019", fig.path = "Images/", echo=FALSE, fig.align = "center"}
 Thunderstorm_locations <- data.frame(storm19 %>%
   select(STATE, EVENT_TYPE, MONTH_NAME, BEGIN_LAT, BEGIN_LON) %>%
   filter(EVENT_TYPE %in%c("Thunderstorm Wind"),
@@ -163,11 +165,12 @@ thunderstorm_counts <- storm19 %>%
   arrange(desc(count))%>%
   head(10)
 
-knitr::kable(thunderstorm_counts, caption = "Top10 states by number of thunderstorm in 2019")
+knitr::kable(thunderstorm_counts, caption = "Top10 states by number of thunderstorm in 2019")%>%
+  kableExtra::kable_styling(latex_options = "hold_position")
 ```
 
 Figure \@ref(fig:monthplot) shows that the number of  thunderstorm wind occurred in different states by month. The thunderstorm wind most frequently happened from May to August. However the peak of the number of such cases were different from some states, August is the peak month of some eastern America states like New York, Pennsylvania and Virginia, for the middle of America states like Texas and Missouri, the peak months were May and June.
-```{r monthplot, fig.cap = "The nuber of thunderstorm events of top10 states in diffenrent month", echo=FALSE, fig.align = "center"}
+```{r monthplot, fig.cap = "The nuber of thunderstorm events of top10 states in diffenrent month", fig.path = "Images/", echo=FALSE, fig.align = "center"}
 thunderstorm_time <- storm19 %>%
     filter(EVENT_TYPE %in%c("Thunderstorm Wind")) %>%
   select(STATE, EVENT_TYPE, MONTH_NAME) %>%
