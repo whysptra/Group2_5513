@@ -71,7 +71,7 @@ storm_all <- rbind(storm17,storm18,storm19)
 \clearpage
 
 # Introduction
-
+Storm can disturb the surface of earth by thunderstorm, snowstorm, rainstorm, sandstorm, flood and so on to cause the road impassibility, the damage of properties and even the injuries and death. Current research shows that hurricanes in the eastern North Pacific can provide water to parts of the southwestern United States and parts of Mexico. More than half of Japan’s rainfall comes from typhoons, but at the same time strong convective weather such as hail can also damage buildings and cars parked on the road. , And seriously affected the output of crops such as corn and wheat. This report will focus on the storms happened in America from 2017 to 2019 to analyse it from locations, damages and frequency.
 \clearpage
 
 # Methodology
@@ -212,7 +212,7 @@ thunderstorm_time
 \clearpage
 
 # Conclusion
-
+The most active months of thunderstorm wind were from May to August. Furthermore, the locations of theses events happened from middle and east of America slowly transformed to the east from July to October.
 \clearpage
 
 # Citation examples
