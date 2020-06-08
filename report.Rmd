@@ -146,7 +146,7 @@ kable(top5_newtable[1:10,],
                 latex_options = c("hold_position"))
 ```
 
-```{r  frequencyplot,fig.height = 30, fig.width= 30, echo = FALSE}
+```{r  frequencyplot,fig.height = 30, fig.width= 30, echo = FALSE, fig.cap="Occurence of top five most frequent events changing by year"}
 ggplot(top5_newtable,
        aes(x= YEAR, 
            y = FREQ, group = EVENT_TYPE, color = EVENT_TYPE)) +
