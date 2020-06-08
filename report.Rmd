@@ -189,9 +189,3 @@ We could see that most events have a similar trend, but hail has decreased in 20
 
 \clearpage
 
-# Citation examples
-
-[More styles for natbib here](https://www.overleaf.com/learn/latex/Natbib_bibliography_styles)
-
-
- @BC64 and this is another article about COVID @bai2020presumed and I can also cite R packages as follows @ggplot2
