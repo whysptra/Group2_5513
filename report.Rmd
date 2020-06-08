@@ -144,7 +144,7 @@ storm_all %>%
 
 ## Direct injuries and deaths by state
 
-Figure \@ref(fig:fig3) shows the direct injuries of each state through 2017 to 2019. In 2017, Georgia had over 150 direct injuries which is the most among all the states. In 2018, California had over 350 direct injuries which is the most among all the states. Meanwhile, Oklahoma and Missouri also had over 200 direct injuries. The most injuries in 2019 happened in Ohio, with over 200 injuries.
+Figure \@ref(fig:fig3) shows the direct injuries of each state through 2017 to 2019. In 2017, Georgia had over 150 direct injuries which is the most among all the states. In 2018, California had over 350 direct injuries which is the most among all the states due to a historical largest wildfire(@california).  Meanwhile, Oklahoma and Missouri also had over 200 direct injuries. The most injuries in 2019 happened in Ohio, with over 200 injuries.
 
 
 ```{r fig3, fig.cap = "Total direct injuries by state", fig.height=8}
