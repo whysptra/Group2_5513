@@ -2,7 +2,7 @@
 title: "Assignment 4 ETC5513"
 author: "XXXX"
 output:
-  pdf_document:
+  bookdown::pdf_document2:
     citation_package: natbib
     highlight: tango
     number_sections: yes
