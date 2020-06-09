@@ -72,7 +72,7 @@ storm_all <- rbind(storm17,storm18,storm19)
 \clearpage
 
 # Introduction
-
+Storm can disturb the surface of earth by thunderstorm, snowstorm, rainstorm, sandstorm, flood and so on to cause the road impassibility, the damage of properties and even the injuries and death. Current research shows that hurricanes in the eastern North Pacific can provide water to parts of the southwestern United States and parts of Mexico. More than half of Japan’s rainfall comes from typhoons, but at the same time strong convective weather such as hail can also damage buildings and cars parked on the road. , And seriously affected the output of crops such as corn and wheat. This report will focus on the storms happened in America from 2017 to 2019 to analyse it from locations, damages and frequency.
 \clearpage
 
 # Methodology
@@ -80,6 +80,120 @@ storm_all <- rbind(storm17,storm18,storm19)
 \clearpage
 
 # Section 1
+From the Table \@ref(tab:stormtb) the top 10 numbers of storm events in America are all concentrate in 2017 and 2019 in the past three years. The thunderstorm wind happened most frequently, which is 18617 cases in 2019 and 16472 cases in 2017, after that is hail followed by 10398 in 2017 and 9013 in 2019.
+```{r stormtb, echo=FALSE}
+event19 <- storm19 %>%
+  select(EVENT_TYPE, YEAR) %>%
+  group_by(EVENT_TYPE, YEAR) %>%  
+  summarise(count=n())
+
+event18 <- storm18 %>%
+  select(EVENT_TYPE, YEAR) %>%
+  group_by(EVENT_TYPE, YEAR)
+
+event17 <- storm17 %>%
+  select(EVENT_TYPE, YEAR) %>%
+  group_by(EVENT_TYPE, YEAR) %>%  
+  summarise(count=n())
+
+events_3years <- merge(merge(event19, event18, all=TRUE), event17, all=TRUE)%>%
+  arrange(desc(count))%>%
+  head(10)
+
+knitr::kable(events_3years, caption = "Top10 storm events in 3 years ")%>%
+  kableExtra::kable_styling(latex_options = "hold_position")
+```
+
+Table \@ref(tab:countstb) shows the top 10 numbers of storm events happened  in America in 2019. first of all is thunderstorm wind happened 18617 times, after that is hail with 9013 cases and flood with 4949 cases and flash flood followed by 4072 cases. The other six are winter weather, high wind, winter storm, heavy snow, marine thunderstorm wind and tornado in order.
+```{r countstb, echo=FALSE}
+event_counts <- storm19 %>%
+  select(STATE, EVENT_TYPE, BEGIN_LAT, BEGIN_LON) %>%
+  group_by(EVENT_TYPE) %>%
+  summarise(count=n())%>%
+  arrange(desc(count))%>%
+  head(5)
+
+knitr::kable(event_counts, caption = "Top5 storm event frequency in 2019")%>%
+  kableExtra::kable_styling(latex_options = "hold_position")
+```
+
+Figure  \@ref(fig:locationmap) shows the distributions of the most frequently happened five storm events' locations in 2019. It is clear to see that theses storm events happened more in eastern of America and some in the middle of America. 
+```{r locationmap, fig.cap = "Top5 storm event locations in 2019", fig.path = "Images/", echo=FALSE, fig.align = "center"}
+library(ggmap)
+library(ggthemes)
+library(ggplot2)
+usa_bbox <- c(-130,
+              20,
+              -60,
+              50)
+usa_map <- get_map(location = usa_bbox, source = "osm")
+storm_locations <- data.frame(storm19 %>%
+  select(STATE, EVENT_TYPE, BEGIN_LAT, BEGIN_LON) %>%
+  filter(EVENT_TYPE %in%c("Thunderstorm Wind", 
+                    "Hail",
+                    "Flood",
+                    "Flash Flood",
+                    "Winter Weather"),
+         BEGIN_LON != "NA",
+         BEGIN_LAT != "NA"))
+ggmap(usa_map) +
+  geom_point(data= storm_locations, aes(x= BEGIN_LON, y = BEGIN_LAT, color = EVENT_TYPE),
+              alpha = 0.3, size = 0.5) +
+  theme_map()
+```
+
+Figure \@ref(fig:TWmonth) shows the thunderstorm wind locations in America in 2019 of different months. It is clear to see that the most active months of thunderstorm wind were from May to August. Furthermore, the locations of theses events happened from middle and east of America slowly transformed to the east from July to October. 
+```{r TWmonth, fig.cap = "Thunderstorm locations by month in 2019", fig.path = "Images/", echo=FALSE, fig.align = "center"}
+Thunderstorm_locations <- data.frame(storm19 %>%
+  select(STATE, EVENT_TYPE, MONTH_NAME, BEGIN_LAT, BEGIN_LON) %>%
+  filter(EVENT_TYPE %in%c("Thunderstorm Wind"),
+         BEGIN_LON != "NA",
+         BEGIN_LAT != "NA"))
+         
+ggmap(usa_map) +
+  geom_point(data= Thunderstorm_locations, aes(x= BEGIN_LON, y = BEGIN_LAT),
+             color = "blue",alpha = 0.1, size = 0.3) +
+  facet_wrap(~ MONTH_NAME)
+```
+
+Table \@ref(tab:statestb) displayed the number of thunderstorm wind happed in different states of America in 2019. As we can see from the table, except for Kansas, Texas and Missouri, the top ten states are all located in the east of America.
+```{r statestb, echo=FALSE}
+thunderstorm_counts <- storm19 %>%
+    filter(EVENT_TYPE %in%c("Thunderstorm Wind")) %>%
+  select(STATE, EVENT_TYPE, DEATHS_DIRECT, BEGIN_LAT, BEGIN_LON) %>%
+  group_by(STATE) %>%
+  summarise(count=n())%>%
+  arrange(desc(count))%>%
+  head(10)
+
+knitr::kable(thunderstorm_counts, caption = "Top10 states by number of thunderstorm in 2019")%>%
+  kableExtra::kable_styling(latex_options = "hold_position")
+```
+
+Figure \@ref(fig:monthplot) shows that the number of  thunderstorm wind occurred in different states by month. The thunderstorm wind most frequently happened from May to August. However the peak of the number of such cases were different from some states, August is the peak month of some eastern America states like New York, Pennsylvania and Virginia, for the middle of America states like Texas and Missouri, the peak months were May and June.
+```{r monthplot, fig.cap = "The nuber of thunderstorm events of top10 states in diffenrent month", fig.path = "Images/", echo=FALSE, fig.align = "center"}
+thunderstorm_time <- storm19 %>%
+    filter(EVENT_TYPE %in%c("Thunderstorm Wind")) %>%
+  select(STATE, EVENT_TYPE, MONTH_NAME) %>%
+  filter(EVENT_TYPE %in%c("Thunderstorm Wind"),
+         STATE %in%c("PENNSYLVANIA",
+                     "VIRGINIA",
+                     "TEXAS",
+                     "NEW YORK",
+                     "OHIO",
+                     "KANSAS",
+                     "NORTH CAROLINA",
+                     "GEORGIA",
+                     "MISSOURI",
+                     "SOUTH CAROLINA")) %>%
+  group_by(MONTH_NAME, STATE) %>%
+  summarise(count=n())%>%
+ggplot(aes(x = MONTH_NAME, y = count)) +
+  geom_point() +
+  facet_wrap(~ STATE)
+thunderstorm_time
+```
+
 
 
 \clearpage
@@ -207,7 +321,7 @@ storm_all %>% filter(EVENT_TYPE == "Tornado", STATE == "TEXAS", YEAR == "2019") 
 \clearpage
 
 # Conclusion
-
+The most active months of thunderstorm wind were from May to August. Furthermore, the locations of theses events happened from middle and east of America slowly transformed to the east from July to October.
 \clearpage
 
 # Citation examples
