@@ -77,7 +77,7 @@ storm_all <- rbind(storm17,storm18,storm19)
 \clearpage
 
 # Introduction
-Storm can disturb the surface of earth by thunderstorm, snowstorm, rainstorm, sandstorm, flood and so on to cause the road impassibility, the damage of properties and even the injuries and death. Current research shows that hurricanes in the eastern North Pacific can provide water to parts of the southwestern United States and parts of Mexico. More than half of Japan’s rainfall comes from typhoons, but at the same time strong convective weather such as hail can also damage buildings and cars parked on the road. , And seriously affected the output of crops such as corn and wheat. This report will focus on the storms happened in America from 2017 to 2019 to analyse it from locations, damages and frequency.
+Storm can disturb the surface of earth by thunderstorm, snowstorm, rainstorm, sandstorm, flood and so on to cause the road impassibility, the damage of properties and even the injuries and death. Current research @Christopherson2015geosystems shows that hurricanes in the eastern North Pacific can provide water to parts of the southwestern United States and parts of Mexico. More than half of Japan’s rainfall comes from typhoons, but at the same time strong convective weather such as hail can also damage buildings and cars parked on the road. , And seriously affected the output of crops such as corn and wheat. This report will focus on the storms happened in America from 2017 to 2019 to analyse it from locations, damages and frequency.
 
 
 # Data
@@ -129,7 +129,11 @@ The packages used are as follows :
 
 \clearpage
 
-# Section 1
+# Section 1: Locations
+This section will focus on the most frequently happened storms and their locations in America from 2017 to 2019.
+
+## Most frequently happened storms in America
+
 From the Table \@ref(tab:stormtb) the top 10 numbers of storm events in America are all concentrate in 2017 and 2019 in the past three years. The thunderstorm wind happened most frequently, which is 18617 cases in 2019 and 16472 cases in 2017, after that is hail followed by 10398 in 2017 and 9013 in 2019.
 ```{r stormtb, echo=FALSE}
 event19 <- storm19 %>%
@@ -154,7 +158,7 @@ knitr::kable(events_3years, caption = "Top10 storm events in 3 years ")%>%
   kableExtra::kable_styling(latex_options = "hold_position")
 ```
 
-Table \@ref(tab:countstb) shows the top 10 numbers of storm events happened  in America in 2019. first of all is thunderstorm wind happened 18617 times, after that is hail with 9013 cases and flood with 4949 cases and flash flood followed by 4072 cases. The other six are winter weather, high wind, winter storm, heavy snow, marine thunderstorm wind and tornado in order.
+Table \@ref(tab:countstb) shows the top 10 numbers of storm events happened  in America in 2019. First of all is thunderstorm wind happened 18617 times, after that is hail with 9013 cases and flood with 4949 cases and flash flood followed by 4072 cases. The other six are winter weather, high wind, winter storm, heavy snow, marine thunderstorm wind and tornado in order.
 ```{r countstb, echo=FALSE}
 event_counts <- storm19 %>%
   select(STATE, EVENT_TYPE, BEGIN_LAT, BEGIN_LON) %>%
@@ -196,7 +200,9 @@ ggmap(usa_map) +
 
 \clearpage
 
-Figure \@ref(fig:TWmonth) shows the thunderstorm wind locations in America in 2019 of different months. It is clear to see that the most active months of thunderstorm wind were from May to August. Furthermore, the locations of theses events happened from middle and east of America slowly transformed to the east from July to October. 
+## Thunderstorm wind in America in 2019
+
+Figure \@ref(fig:TWmonth) shows the thunderstorm wind locations in America in 2019 of different months. It is clear to see that the most active months of thunderstorm wind were from May to August [@Christopherson2015geosystems]. Furthermore, the locations of theses events happened from middle and east of America slowly transformed to the east from July to October. 
 ```{r TWmonth, fig.cap = "Thunderstorm locations by month in 2019", fig.path = "Images/", echo=FALSE, fig.align = "center"}
 Thunderstorm_locations <- data.frame(storm19 %>%
   select(STATE, EVENT_TYPE, MONTH_NAME, BEGIN_LAT, BEGIN_LON) %>%
@@ -227,7 +233,7 @@ knitr::kable(thunderstorm_counts, caption = "Top10 states by number of thunderst
 ```
 
 Figure \@ref(fig:monthplot) shows that the number of  thunderstorm wind occurred in different states by month. The thunderstorm wind most frequently happened from May to August. However the peak of the number of such cases were different from some states, August is the peak month of some eastern America states like New York, Pennsylvania and Virginia, for the middle of America states like Texas and Missouri, the peak months were May and June.
-```{r monthplot, fig.cap = "The nuber of thunderstorm events of top10 states in diffenrent month", fig.path = "Images/", echo=FALSE, fig.align = "center"}
+```{r monthplot, fig.cap = "The nuber of thunderstorm events of top10 states in diffenrent month", fig.path = "Images/", echo=FALSE, fig.align = "center", fig.height= 4, fig.width= 6}
 thunderstorm_time <- storm19 %>%
     filter(EVENT_TYPE %in%c("Thunderstorm Wind")) %>%
   select(STATE, EVENT_TYPE, MONTH_NAME) %>%
@@ -247,7 +253,7 @@ thunderstorm_time <- storm19 %>%
 ggplot(aes(x = MONTH_NAME, y = count)) +
   geom_point() +
   facet_wrap(~ STATE) + 
-  theme(axis.text.x = element_text(angle=90, hjust=1))
+  theme(axis.text.x = element_text(angle=45, hjust=1))
 thunderstorm_time
 ```
 
@@ -279,6 +285,7 @@ storm_all %>%
   ggtitle("Total direct injuries by month")
 ```
 
+
 ```{r fig2, fig.cap = "Total direct deaths by month"}
 storm_all %>% 
   group_by(YEAR, MONTH_NAME) %>% 
@@ -298,7 +305,7 @@ storm_all %>%
 Figure \@ref(fig:fig3) shows the direct injuries of each state through 2017 to 2019. In 2017, Georgia had over 150 direct injuries which is the most among all the states. In 2018, California had over 350 direct injuries which is the most among all the states due to a historical largest wildfire(@california).  Meanwhile, Oklahoma and Missouri also had over 200 direct injuries. The most injuries in 2019 happened in Ohio, with over 200 injuries.
 
 
-```{r fig3, fig.cap = "Total direct injuries by state", fig.height=8}
+```{r fig3, fig.cap = "Total direct injuries by state", fig.height=6}
 storm_all %>% 
   group_by(YEAR, STATE) %>% 
   mutate(injury_tot_state = sum(INJURIES_DIRECT)) %>% 
@@ -317,7 +324,7 @@ storm_all %>%
 Figure \@ref(fig:fig4) shows the direct deaths of each state through 2017 to 2019. In 2017, Texas had about 100 direct deaths, which is the most among all the states. In 2018, Arizona had over 150 direct deaths and California had about 150 direct deaths, which are more than other states. In 2019, no state had more than 50 direct deaths, and Texas is slightly higher than others.
 
 
-```{r fig4, fig.cap = "Total direct deaths by state", fig.height=8}
+```{r fig4, fig.cap = "Total direct deaths by state", fig.height=6}
 storm_all %>% 
   group_by(YEAR, STATE) %>% 
   mutate(death_tot_state = sum(DEATHS_DIRECT)) %>% 
