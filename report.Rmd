@@ -1,6 +1,6 @@
 ---
 title: "Assignment 4 ETC5513"
-author: "Yan Ma"
+author: "Yan Ma, Yiwen Zhang, Yuqi Wang, Putu Wahyu Saputra"
 output:
   bookdown::pdf_document2:
     citation_package: natbib
@@ -45,6 +45,7 @@ library(kableExtra)
 library(gridExtra)
 theme_set(theme_minimal())
 library(ggplot2)
+
 ```
 
 ```{r cleaning-data}
@@ -102,6 +103,19 @@ One of the defects of this dataset is that there is no further division of the s
 - Use rbind function to bind the data of different years.
 
 _ Use @ggplot2 package to create plots.
+
+The packages used are as follows :
+- ggplot2 [@ggplot2]
+- lubridate [@lubridate]
+- readr [@readr]
+- tidyverse [@tidyverse]
+- usmap [@usmap]
+- kableExtra [@kableExtra]
+- gridExtra [@gridExtra]
+- bookdown [@bookdown]
+- plot_usmap [@usmap]
+- ggthemes[@ggthemes]
+- ggmap [@ggmap]
 
 \clearpage
 
@@ -225,7 +239,6 @@ thunderstorm_time
 \clearpage
 
 # Section 2: Injuries and Deaths
-
 
 This section will focus on the injuries and deaths caused by the storm events and other unusual weather phenomena across the US from 2017 to 2019.
 
@@ -562,13 +575,18 @@ storm_all %>% filter(EVENT_TYPE == "Tornado", STATE == "TEXAS", YEAR == "2019") 
 \clearpage
 
 # Conclusion
-The most active months of thunderstorm wind were from May to August. Furthermore, the locations of theses events happened from middle and east of America slowly transformed to the east from July to October.
 
-Over all the years, there are less direct injuries of storm events from September to December, while more direct injuries happened on January June and July. Most direct deaths happened on January, June to September and November.
+- The most active months of thunderstorm wind were from May to August. Furthermore, the locations of theses events happened from middle and east of America slowly transformed to the east from July to October.
 
-In 2017, Georgia had the most direct injuries and Texas had the most direct deaths among all the states. In 2018, California had the most direct injuries and Arizona had the most direct deaths among all the states. In 2019, no state had more than 50 direct deaths, and Texas is slightly higher than others while Ohio had the most direct injuries. 
+- Over all the years, there are less direct injuries of storm events from September to December, while more direct injuries happened on January June and July. Most direct deaths happened on January, June to September and November.
 
-Tornado caused most injuries in 2017 and 2019, while heat caused more injuries than other types of events in 2018. Excessive Heat caused most direct deaths among the five major event types in 2018, while flash flood caused slightly more direct deaths in 2017 and 2019. In addition, direct deaths caused by wildfire is decreasing in this time period.
+- In 2017, Georgia had the most direct injuries and Texas had the most direct deaths among all the states. In 2018, California had the most direct injuries and Arizona had the most direct deaths among all the states. In 2019, no state had more than 50 direct deaths, and Texas is slightly higher than others while Ohio had the most direct injuries. 
+
+- Tornado caused most injuries in 2017 and 2019, while heat caused more injuries than other types of events in 2018. Excessive Heat caused most direct deaths among the five major event types in 2018, while flash flood caused slightly more direct deaths in 2017 and 2019. In addition, direct deaths caused by wildfire is decreasing in this time period.
+
+- Seeing from top five most frequent events, most events have a similar trend. However,  hail has decreased in 2018 to 2019 years with floods increasing instead.
+
+- Tornado mostly happen in May while Texas is the state with the highest number of tornado in USA.
 \clearpage
 
 
