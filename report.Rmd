@@ -78,7 +78,7 @@ storm_all <- rbind(storm17,storm18,storm19)
 
 # Introduction
 Storm can disturb the surface of earth by thunderstorm, snowstorm, rainstorm, sandstorm, flood and so on to cause the road impassibility, the damage of properties and even the injuries and death. Current research shows that hurricanes in the eastern North Pacific can provide water to parts of the southwestern United States and parts of Mexico. More than half of Japan’s rainfall comes from typhoons, but at the same time strong convective weather such as hail can also damage buildings and cars parked on the road. , And seriously affected the output of crops such as corn and wheat. This report will focus on the storms happened in America from 2017 to 2019 to analyse it from locations, damages and frequency.
-\clearpage
+
 
 # Data
 
@@ -90,7 +90,6 @@ We download the dataset from Storm Events Database data set which contains 31 va
 
 One of the defects of this dataset is that there is no further division of the scale of disasters, because the losses, casualties and even distribution areas caused by disasters of different scales are different, for example, it is quite difficult to distinguish between small versus large hail through this dataset. So, if there is a further division of the scale of disasters, it will be more conducive to analysis.
 
-\clearpage
 
 # Methodology
 
@@ -102,19 +101,30 @@ One of the defects of this dataset is that there is no further division of the s
 
 - Use rbind function to bind the data of different years.
 
-_ Use @ggplot2 package to create plots.
+- Use @ggplot2 package to create plots.
 
 The packages used are as follows :
+
 - ggplot2 [@ggplot2]
+
 - lubridate [@lubridate]
+
 - readr [@readr]
+
 - tidyverse [@tidyverse]
+
 - usmap [@usmap]
+
 - kableExtra [@kableExtra]
+
 - gridExtra [@gridExtra]
+
 - bookdown [@bookdown]
+
 - plot_usmap [@usmap]
+
 - ggthemes[@ggthemes]
+
 - ggmap [@ggmap]
 
 \clearpage
@@ -157,6 +167,8 @@ knitr::kable(event_counts, caption = "Top5 storm event frequency in 2019")%>%
   kableExtra::kable_styling(latex_options = "hold_position")
 ```
 
+\clearpage
+
 Figure  \@ref(fig:locationmap) shows the distributions of the most frequently happened five storm events' locations in 2019. It is clear to see that theses storm events happened more in eastern of America and some in the middle of America. 
 ```{r locationmap, fig.cap = "Top5 storm event locations in 2019", fig.path = "Images/", echo=FALSE, fig.align = "center"}
 library(ggmap)
@@ -182,6 +194,8 @@ ggmap(usa_map) +
   theme_map()
 ```
 
+\clearpage
+
 Figure \@ref(fig:TWmonth) shows the thunderstorm wind locations in America in 2019 of different months. It is clear to see that the most active months of thunderstorm wind were from May to August. Furthermore, the locations of theses events happened from middle and east of America slowly transformed to the east from July to October. 
 ```{r TWmonth, fig.cap = "Thunderstorm locations by month in 2019", fig.path = "Images/", echo=FALSE, fig.align = "center"}
 Thunderstorm_locations <- data.frame(storm19 %>%
@@ -195,6 +209,8 @@ ggmap(usa_map) +
              color = "blue",alpha = 0.1, size = 0.3) +
   facet_wrap(~ MONTH_NAME)
 ```
+
+\clearpage
 
 Table \@ref(tab:statestb) displayed the number of thunderstorm wind happed in different states of America in 2019. As we can see from the table, except for Kansas, Texas and Missouri, the top ten states are all located in the east of America.
 ```{r statestb, echo=FALSE}
@@ -230,7 +246,8 @@ thunderstorm_time <- storm19 %>%
   summarise(count=n())%>%
 ggplot(aes(x = MONTH_NAME, y = count)) +
   geom_point() +
-  facet_wrap(~ STATE)
+  facet_wrap(~ STATE) + 
+  theme(axis.text.x = element_text(angle=90, hjust=1))
 thunderstorm_time
 ```
 
