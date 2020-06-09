@@ -2,7 +2,7 @@
 title: "Assignment 4 ETC5513"
 author: "XXXX"
 output:
-  pdf_document:
+  bookdown::pdf_document2:
     citation_package: natbib
     highlight: tango
     number_sections: yes
@@ -13,7 +13,7 @@ output:
     toc: yes
     toc_depth: '2'
 bibliography: references.bib 
-biblio-style: dinat
+biblio-style: plainnat
 subtitle: Team name
 header-includes:
 - \usepackage{titling}
@@ -30,8 +30,8 @@ header-includes:
 - \pagestyle{fancy}
 ---
 
-```{r setup}
-knitr::opts_chunk$set(echo = TRUE, message=FALSE, warning= FALSE)
+```{r setup,include=FALSE}
+knitr::opts_chunk$set(echo = FALSE, message=FALSE, warning= FALSE)
 ```
 
 ```{r libraries}
@@ -40,6 +40,7 @@ library(knitr)
 library(readr)
 library(lubridate)
 library(bookdown)
+library(usmap)
 ```
 
 ```{r cleaning-data}
@@ -71,7 +72,7 @@ storm_all <- rbind(storm17,storm18,storm19)
 \clearpage
 
 # Introduction
-
+Storm can disturb the surface of earth by thunderstorm, snowstorm, rainstorm, sandstorm, flood and so on to cause the road impassibility, the damage of properties and even the injuries and death. Current research shows that hurricanes in the eastern North Pacific can provide water to parts of the southwestern United States and parts of Mexico. More than half of Japan’s rainfall comes from typhoons, but at the same time strong convective weather such as hail can also damage buildings and cars parked on the road. , And seriously affected the output of crops such as corn and wheat. This report will focus on the storms happened in America from 2017 to 2019 to analyse it from locations, damages and frequency.
 \clearpage
 
 # Methodology
@@ -79,6 +80,120 @@ storm_all <- rbind(storm17,storm18,storm19)
 \clearpage
 
 # Section 1
+From the Table \@ref(tab:stormtb) the top 10 numbers of storm events in America are all concentrate in 2017 and 2019 in the past three years. The thunderstorm wind happened most frequently, which is 18617 cases in 2019 and 16472 cases in 2017, after that is hail followed by 10398 in 2017 and 9013 in 2019.
+```{r stormtb, echo=FALSE}
+event19 <- storm19 %>%
+  select(EVENT_TYPE, YEAR) %>%
+  group_by(EVENT_TYPE, YEAR) %>%  
+  summarise(count=n())
+
+event18 <- storm18 %>%
+  select(EVENT_TYPE, YEAR) %>%
+  group_by(EVENT_TYPE, YEAR)
+
+event17 <- storm17 %>%
+  select(EVENT_TYPE, YEAR) %>%
+  group_by(EVENT_TYPE, YEAR) %>%  
+  summarise(count=n())
+
+events_3years <- merge(merge(event19, event18, all=TRUE), event17, all=TRUE)%>%
+  arrange(desc(count))%>%
+  head(10)
+
+knitr::kable(events_3years, caption = "Top10 storm events in 3 years ")%>%
+  kableExtra::kable_styling(latex_options = "hold_position")
+```
+
+Table \@ref(tab:countstb) shows the top 10 numbers of storm events happened  in America in 2019. first of all is thunderstorm wind happened 18617 times, after that is hail with 9013 cases and flood with 4949 cases and flash flood followed by 4072 cases. The other six are winter weather, high wind, winter storm, heavy snow, marine thunderstorm wind and tornado in order.
+```{r countstb, echo=FALSE}
+event_counts <- storm19 %>%
+  select(STATE, EVENT_TYPE, BEGIN_LAT, BEGIN_LON) %>%
+  group_by(EVENT_TYPE) %>%
+  summarise(count=n())%>%
+  arrange(desc(count))%>%
+  head(5)
+
+knitr::kable(event_counts, caption = "Top5 storm event frequency in 2019")%>%
+  kableExtra::kable_styling(latex_options = "hold_position")
+```
+
+Figure  \@ref(fig:locationmap) shows the distributions of the most frequently happened five storm events' locations in 2019. It is clear to see that theses storm events happened more in eastern of America and some in the middle of America. 
+```{r locationmap, fig.cap = "Top5 storm event locations in 2019", fig.path = "Images/", echo=FALSE, fig.align = "center"}
+library(ggmap)
+library(ggthemes)
+library(ggplot2)
+usa_bbox <- c(-130,
+              20,
+              -60,
+              50)
+usa_map <- get_map(location = usa_bbox, source = "osm")
+storm_locations <- data.frame(storm19 %>%
+  select(STATE, EVENT_TYPE, BEGIN_LAT, BEGIN_LON) %>%
+  filter(EVENT_TYPE %in%c("Thunderstorm Wind", 
+                    "Hail",
+                    "Flood",
+                    "Flash Flood",
+                    "Winter Weather"),
+         BEGIN_LON != "NA",
+         BEGIN_LAT != "NA"))
+ggmap(usa_map) +
+  geom_point(data= storm_locations, aes(x= BEGIN_LON, y = BEGIN_LAT, color = EVENT_TYPE),
+              alpha = 0.3, size = 0.5) +
+  theme_map()
+```
+
+Figure \@ref(fig:TWmonth) shows the thunderstorm wind locations in America in 2019 of different months. It is clear to see that the most active months of thunderstorm wind were from May to August. Furthermore, the locations of theses events happened from middle and east of America slowly transformed to the east from July to October. 
+```{r TWmonth, fig.cap = "Thunderstorm locations by month in 2019", fig.path = "Images/", echo=FALSE, fig.align = "center"}
+Thunderstorm_locations <- data.frame(storm19 %>%
+  select(STATE, EVENT_TYPE, MONTH_NAME, BEGIN_LAT, BEGIN_LON) %>%
+  filter(EVENT_TYPE %in%c("Thunderstorm Wind"),
+         BEGIN_LON != "NA",
+         BEGIN_LAT != "NA"))
+         
+ggmap(usa_map) +
+  geom_point(data= Thunderstorm_locations, aes(x= BEGIN_LON, y = BEGIN_LAT),
+             color = "blue",alpha = 0.1, size = 0.3) +
+  facet_wrap(~ MONTH_NAME)
+```
+
+Table \@ref(tab:statestb) displayed the number of thunderstorm wind happed in different states of America in 2019. As we can see from the table, except for Kansas, Texas and Missouri, the top ten states are all located in the east of America.
+```{r statestb, echo=FALSE}
+thunderstorm_counts <- storm19 %>%
+    filter(EVENT_TYPE %in%c("Thunderstorm Wind")) %>%
+  select(STATE, EVENT_TYPE, DEATHS_DIRECT, BEGIN_LAT, BEGIN_LON) %>%
+  group_by(STATE) %>%
+  summarise(count=n())%>%
+  arrange(desc(count))%>%
+  head(10)
+
+knitr::kable(thunderstorm_counts, caption = "Top10 states by number of thunderstorm in 2019")%>%
+  kableExtra::kable_styling(latex_options = "hold_position")
+```
+
+Figure \@ref(fig:monthplot) shows that the number of  thunderstorm wind occurred in different states by month. The thunderstorm wind most frequently happened from May to August. However the peak of the number of such cases were different from some states, August is the peak month of some eastern America states like New York, Pennsylvania and Virginia, for the middle of America states like Texas and Missouri, the peak months were May and June.
+```{r monthplot, fig.cap = "The nuber of thunderstorm events of top10 states in diffenrent month", fig.path = "Images/", echo=FALSE, fig.align = "center"}
+thunderstorm_time <- storm19 %>%
+    filter(EVENT_TYPE %in%c("Thunderstorm Wind")) %>%
+  select(STATE, EVENT_TYPE, MONTH_NAME) %>%
+  filter(EVENT_TYPE %in%c("Thunderstorm Wind"),
+         STATE %in%c("PENNSYLVANIA",
+                     "VIRGINIA",
+                     "TEXAS",
+                     "NEW YORK",
+                     "OHIO",
+                     "KANSAS",
+                     "NORTH CAROLINA",
+                     "GEORGIA",
+                     "MISSOURI",
+                     "SOUTH CAROLINA")) %>%
+  group_by(MONTH_NAME, STATE) %>%
+  summarise(count=n())%>%
+ggplot(aes(x = MONTH_NAME, y = count)) +
+  geom_point() +
+  facet_wrap(~ STATE)
+thunderstorm_time
+```
+
 
 
 \clearpage
@@ -95,15 +210,121 @@ storm_all <- rbind(storm17,storm18,storm19)
 
 # Section 4
 
+Based on the calculation of the number of tornadoes that occur each year, the United States becomes a country with more than 1000 events each year. @USTornad80 Table \@ref(tab:table-tornado) shows the number of tornadoes from 2017 to 2019 in the United States.
+The table made by `kable` function from `knitr` package. @knitr 
+
+```{r table-tornado}
+storm_all %>% filter(EVENT_TYPE %in% c("Tornado")) %>%
+  group_by(YEAR, EVENT_TYPE) %>%
+  tally() %>%
+  kable(caption = "Total number of Tornado that occurs from 2017-2019 in United States") %>%
+  kableExtra::kable_styling(latex_options = "hold_position")
+```
+
+We use `ggplot2` package to map the distribution overtime. @ggplot2 To see the number of tornadoes that occur each month during these three years can be seen in Figure \@ref(total-f-scale). From this plot, it can be seen that most tornadoes occur on average in the range of April and May. 2019 recorded a high number of tornadoes in May compared to the previous two years.
+
+```{r total-f-scale, fig.cap= "Tornado frequency from 2017-2019 in USA", fig.width =7, fig.height=4}
+# Total F scale
+storm_all$YEAR<- as.character(storm_all$YEAR)
+storm_all %>% filter(EVENT_TYPE %in% c("Tornado")) %>%
+  group_by(YEAR, MONTH_NAME) %>%
+  tally() %>%
+  ggplot(aes(x=MONTH_NAME,
+             y= n,
+             group = YEAR,
+             colour=YEAR))+
+  geom_line() +
+  geom_point() +
+  theme(legend.position = "bottom")
+```
+
+\clearpage
+
+Figure \@ref(fig:map-tornado) shows the map of the United States with the highest number of tornadoes during 2017-2019. The map plotted using `plot_usmap` function from `usmap` package. @usmap 
+
+```{r map-tornado, fig.cap= "United States map of total tornado in each state", fig.height=3, fig.width=6}
+statepop1 <- storm_all %>% filter(EVENT_TYPE %in% c("Tornado")) %>%
+  group_by(STATE_FIPS, STATE) %>%
+  tally() %>%
+  summarise(total = sum(n))
+
+# make sure fips table is char and has the name fips to match the usmap function
+statepop1$STATE_FIPS <- as.character(statepop1$STATE_FIPS)
+statepop1 <- statepop1 %>% rename(fips=STATE_FIPS)
+
+plot_usmap(data = statepop1, values = "total", label=TRUE, label_color = "Black")+
+  scale_fill_continuous(
+    low = "white", high = "red", name = "Total Tornado 2017-2019", label = scales::comma
+  ) + theme(legend.position = "right")
+```
+
+Each tornado that occurs has a scale. Based on dataset documentation, enhanced Fujita Scale describes the strength of the tornado based on the amount and type of damage caused by the tornado. @documentation
+The F scale listed as Table \@ref(tab:scale) :
+
+```{r scale}
+scale_f <- data_frame("Scale" = c("EF0","EF1","EF2","EF3", "EF4", "EF5", "EFU"),
+                      "Category" = c("Light","Moderate","Significant","Severe", "Devastating","Incredible","Unknown"),
+                      "Speed" = c("40 – 72 mph","73 – 112 mph","113 – 157 mph","158 – 206 mph","207 – 260 mph","261 – 318 mph","Unknown"))
+kable(scale_f, caption = "Level of Tornadoes") %>%
+    kableExtra::kable_styling(latex_options = "hold_position")
+```
+When there is no tornado damage, but there is evidence a tornado existed (citation)
+
+In Table \@ref(tab:tornado-state), Texas is the state that has been hit the most by Tornadoes—followed by Kansas, Alabama, Missouri, and Minnesota. The top four states have experienced Tornadoes on an EF4 scale from 2017 to 2019. The table style use `kableExtra` package. @kableExtra
+
+```{r tornado-state}
+storm_all %>% filter(EVENT_TYPE %in% c("Tornado")) %>%
+  group_by(STATE, TOR_F_SCALE) %>%
+  tally() %>%
+  pivot_wider(names_from = TOR_F_SCALE, values_from = n) %>%
+  arrange(desc(EF0)) %>%
+  head(5) %>%
+  kable(caption = "Tornado frequency by scale for each state in USA from 2017-2019") %>%
+  kableExtra::kable_styling(latex_options = "hold_position")
+```
+
+As the state with the highest number of tornadoes, we analyze Texas deeper. Figure \@ref(fig:tornado-texas) shows the number of tornadoes that occur overtime based on scale. In general, the number of tornadoes varies each year. EF0 occurs almost every year, but in 2019, the number of EF0 occurs more than 40 times in May. In 2018, the number of tornadoes on the EF1 and EF2 scales was less than in 2017 and 2019. The EF4 happened once in 2018.
+
+```{r tornado-texas, fig.cap= "Tornado scale per month in Texas", fig.width = 7, fig.height=3}
+storm_all %>% filter(EVENT_TYPE == "Tornado", STATE == "TEXAS") %>%
+  group_by(TOR_F_SCALE, MONTH_NAME, YEAR, STATE) %>%
+  tally() %>%
+  ggplot(aes(x=MONTH_NAME,
+             y = n, 
+             group= YEAR,
+             colour = YEAR))+
+  geom_line()+
+  geom_point()+
+  facet_wrap(~TOR_F_SCALE) +
+  theme(axis.text.x = element_text(angle = 90),
+        legend.position = "bottom") +
+  labs(x = "Month", y= "Total")
+```
+
+Figure \@ref(fig:tornado-texas-2019) tells what time of day a tornado with a particular scale occurs in Texas in 2019. Generally, there are differences in each month. May is the most prominent month with almost every day some tornadoes occur.
+
+```{r tornado-texas-2019, fig.cap= "Tornado by hour distribution that happened in Texas in 2019", fig.width = 7, fig.height=3.1}
+storm_all %>% filter(EVENT_TYPE == "Tornado", STATE == "TEXAS", YEAR == "2019") %>%
+  mutate(Time = hour(BEGIN_DATE_TIME)) %>%
+  group_by(MONTH_NAME, Time, TOR_WIDTH, TOR_F_SCALE) %>%
+  ggplot(aes(x=wday(BEGIN_DATE_TIME, label=TRUE),
+             y=Time,
+             colour=TOR_F_SCALE)) +
+  geom_point() +
+  facet_wrap(~MONTH_NAME, ncol = 4,
+             labeller = labeller(MONTH_NAME = label_wrap_gen(20))) +
+  theme(axis.text.x = element_text(angle = 90, vjust = 0.3),
+        legend.position = "bottom") +
+  labs(x = "Days", y = "Time")
+```
+
 \clearpage
 
 # Conclusion
-
+The most active months of thunderstorm wind were from May to August. Furthermore, the locations of theses events happened from middle and east of America slowly transformed to the east from July to October.
 \clearpage
 
 # Citation examples
 
 [More styles for natbib here](https://www.overleaf.com/learn/latex/Natbib_bibliography_styles)
-
-
- @BC64 and this is another article about COVID @bai2020presumed and I can also cite R packages as follows @ggplot2
+@ggplot2
