@@ -397,7 +397,7 @@ storm_all %>%
   geom_col(position = "dodge") + 
   facet_wrap(~ YEAR) + 
   guides(fill=FALSE) + 
-  ggtitle("Total direct injuries by event type") + 
+  ggtitle("Total direct deaths by event type") + 
   theme(axis.text.x = element_text(angle=90, hjust=1))
 ```
 
