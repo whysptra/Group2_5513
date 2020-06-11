@@ -77,14 +77,39 @@ storm_all <- rbind(storm17,storm18,storm19)
 \clearpage
 
 # Introduction
-Storm can disturb the surface of earth by thunderstorm, snowstorm, rainstorm, sandstorm, flood and so on to cause the road impassibility, the damage of properties and even the injuries and death. Current research @Christopherson2015geosystems shows that hurricanes in the eastern North Pacific can provide water to parts of the southwestern United States and parts of Mexico. More than half of Japan’s rainfall comes from typhoons, but at the same time strong convective weather such as hail can also damage buildings and cars parked on the road. , And seriously affected the output of crops such as corn and wheat. This report will focus on the storms happened in America from 2017 to 2019 to analyse it from locations, damages and frequency.
+Storm can disturb the surface of earth by thunderstorm, snowstorm, rainstorm, sandstorm, flood and so on to cause the road impassibility, the damage of properties and even the injuries and death. Current research @Christopherson2015geosystems shows that hurricanes in the eastern North Pacific can provide water to parts of the southwestern United States and parts of Mexico. More than half of Japan’s rainfall comes from typhoons, but at the same time strong convective weather such as hail can also damage buildings and cars parked on the road. , And seriously affected the output of crops such as corn and wheat. This report will focus on the storms happened in US from 2017 to 2019 to analyse it from locations, damages and frequency. This report will answer the research questions as following :
+\begin{enumerate}
+\item Section 1 :
 
+  \begin{itemize}
+    \item What is the most frequently happened storm event in US from 2017-2019?
+    \item Where is the locations and time features of thunderstorm wind?
+  \end{itemize}
+
+\item Section 2 :
+  \begin{itemize}
+    \item How many direct injuries and deaths caused by storm events and other unusual weather phenomena in each month from 2017 to 2019 in the US?
+    \item How many direct injuries and deaths in each state from 2017 to 2019 in the US?
+    \item What’s the major events caused direct injuries and deaths over years and what's the injuries and deaths by each type?
+  \end{itemize}
+
+\item Section 3 :
+  \begin{itemize} 
+    \item What is the trend of occurrence of the top five most frequent events in US
+    \item How the trend changing from 2017 to 2019?
+  \end{itemize}
+
+\item Section 4 :
+  \begin{itemize} 
+    \item Which state that hit by tornado the most and when the event is likely to happen?
+  \end{itemize}
+\end{enumerate}
 
 # Data
 
 ## Data source
 
-We download the dataset from Storm Events Database data set which contains 31 variables and 187139 observations in total from NOAA <https://www.ncdc.noaa.gov/stormevents/>.
+The dataset that we use in this report is Storm Events Database from 2017-2019. The data contain a chronological listing, by state, of weather phenomena (thunderstorm, hail, tornado, etc). @stormdata We obtain the dataset from NOOA website that contains 31 variables and 187139 observations. @stormdata The format from original source is "csv.gz", and we extract them into .csv files. 
 
 ## Data limitation
 
@@ -130,11 +155,11 @@ The packages used are as follows :
 \clearpage
 
 # Section 1: Locations
-This section will focus on the most frequently happened storms and their locations in America from 2017 to 2019.
+This section will focus on the most frequently happened storms and their locations in US from 2017 to 2019.
 
-## Most frequently happened storms in America
+## Most frequently happened storms in US
 
-From the Table \@ref(tab:stormtb) the top 10 numbers of storm events in America are all concentrate in 2017 and 2019 in the past three years. The thunderstorm wind happened most frequently, which is 18617 cases in 2019 and 16472 cases in 2017, after that is hail followed by 10398 in 2017 and 9013 in 2019.
+From the Table \@ref(tab:stormtb) the top 10 numbers of storm events in US are all concentrate in 2017 and 2019 in the past three years. The thunderstorm wind happened most frequently, which is 18617 cases in 2019 and 16472 cases in 2017, after that is hail followed by 10398 in 2017 and 9013 in 2019.
 ```{r stormtb, echo=FALSE}
 event19 <- storm19 %>%
   select(EVENT_TYPE, YEAR) %>%
@@ -158,7 +183,7 @@ knitr::kable(events_3years, caption = "Top10 storm events in 3 years ")%>%
   kableExtra::kable_styling(latex_options = "hold_position")
 ```
 
-Table \@ref(tab:countstb) shows the top 10 numbers of storm events happened  in America in 2019. First of all is thunderstorm wind happened 18617 times, after that is hail with 9013 cases and flood with 4949 cases and flash flood followed by 4072 cases. The other six are winter weather, high wind, winter storm, heavy snow, marine thunderstorm wind and tornado in order.
+Table \@ref(tab:countstb) shows the top 10 numbers of storm events happened  in US in 2019. First of all is thunderstorm wind happened 18617 times, after that is hail with 9013 cases and flood with 4949 cases and flash flood followed by 4072 cases. The other six are winter weather, high wind, winter storm, heavy snow, marine thunderstorm wind and tornado in order.
 ```{r countstb, echo=FALSE}
 event_counts <- storm19 %>%
   select(STATE, EVENT_TYPE, BEGIN_LAT, BEGIN_LON) %>%
@@ -173,7 +198,7 @@ knitr::kable(event_counts, caption = "Top5 storm event frequency in 2019")%>%
 
 \clearpage
 
-Figure  \@ref(fig:locationmap) shows the distributions of the most frequently happened five storm events' locations in 2019. It is clear to see that theses storm events happened more in eastern of America and some in the middle of America. 
+Figure  \@ref(fig:locationmap) shows the distributions of the most frequently happened five storm events' locations in 2019. It is clear to see that theses storm events happened more in eastern of US and some in the middle of US. 
 ```{r locationmap, fig.cap = "Top5 storm event locations in 2019", fig.path = "Images/", echo=FALSE, fig.align = "center"}
 library(ggmap)
 library(ggthemes)
@@ -200,9 +225,9 @@ ggmap(usa_map) +
 
 \clearpage
 
-## Thunderstorm wind in America in 2019
+## Thunderstorm wind in US in 2019
 
-Figure \@ref(fig:TWmonth) shows the thunderstorm wind locations in America in 2019 of different months. It is clear to see that the most active months of thunderstorm wind were from May to August [@Christopherson2015geosystems]. Furthermore, the locations of theses events happened from middle and east of America slowly transformed to the east from July to October. 
+Figure \@ref(fig:TWmonth) shows the thunderstorm wind locations in US in 2019 of different months. It is clear to see that the most active months of thunderstorm wind were from May to August [@Christopherson2015geosystems]. Furthermore, the locations of theses events happened from middle and east of US slowly transformed to the east from July to October. 
 ```{r TWmonth, fig.cap = "Thunderstorm locations by month in 2019", fig.path = "Images/", echo=FALSE, fig.align = "center"}
 Thunderstorm_locations <- data.frame(storm19 %>%
   select(STATE, EVENT_TYPE, MONTH_NAME, BEGIN_LAT, BEGIN_LON) %>%
@@ -218,7 +243,7 @@ ggmap(usa_map) +
 
 \clearpage
 
-Table \@ref(tab:statestb) displayed the number of thunderstorm wind happed in different states of America in 2019. As we can see from the table, except for Kansas, Texas and Missouri, the top ten states are all located in the east of America.
+Table \@ref(tab:statestb) displayed the number of thunderstorm wind happed in different states of US in 2019. As we can see from the table, except for Kansas, Texas and Missouri, the top ten states are all located in the east of US.
 ```{r statestb, echo=FALSE}
 thunderstorm_counts <- storm19 %>%
     filter(EVENT_TYPE %in%c("Thunderstorm Wind")) %>%
@@ -232,7 +257,7 @@ knitr::kable(thunderstorm_counts, caption = "Top10 states by number of thunderst
   kableExtra::kable_styling(latex_options = "hold_position")
 ```
 
-Figure \@ref(fig:monthplot) shows that the number of  thunderstorm wind occurred in different states by month. The thunderstorm wind most frequently happened from May to August. However the peak of the number of such cases were different from some states, August is the peak month of some eastern America states like New York, Pennsylvania and Virginia, for the middle of America states like Texas and Missouri, the peak months were May and June.
+Figure \@ref(fig:monthplot) shows that the number of  thunderstorm wind occurred in different states by month. The thunderstorm wind most frequently happened from May to August. However the peak of the number of such cases were different from some states, August is the peak month of some eastern US states like New York, Pennsylvania and Virginia, for the middle of US states like Texas and Missouri, the peak months were May and June.
 ```{r monthplot, fig.cap = "The nuber of thunderstorm events of top10 states in diffenrent month", fig.path = "Images/", echo=FALSE, fig.align = "center", fig.height= 4, fig.width= 6}
 thunderstorm_time <- storm19 %>%
     filter(EVENT_TYPE %in%c("Thunderstorm Wind")) %>%
@@ -404,7 +429,7 @@ storm_all %>%
 
 \clearpage
 
-# Section 3
+# Section 3 : Trend of events
 
 ## The trend of occurence of the top five most frequent events changing by year 
 
@@ -482,7 +507,7 @@ We could see that most events have a similar trend, but hail has decreased in 20
 
 \clearpage
 
-# Section 4: 
+# Section 4: Tornado
 
 
 Based on the calculation of the number of tornadoes that occur each year, the United States becomes a country with more than 1000 events each year. @USTornad80 Table \@ref(tab:table-tornado) shows the number of tornadoes from 2017 to 2019 in the United States.
@@ -600,7 +625,7 @@ storm_all %>% filter(EVENT_TYPE == "Tornado", STATE == "TEXAS", YEAR == "2019") 
 
 # Conclusion
 
-- The most active months of thunderstorm wind were from May to August. Furthermore, the locations of theses events happened from middle and east of America slowly transformed to the east from July to October.
+- The most active months of thunderstorm wind were from May to August. Furthermore, the locations of theses events happened from middle and east of US slowly transformed to the east from July to October.
 
 - Over all the years, there are less direct injuries of storm events from September to December, while more direct injuries happened on January June and July. Most direct deaths happened on January, June to September and November.
 
