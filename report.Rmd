@@ -14,7 +14,7 @@ output:
     toc_depth: '2'
 bibliography: references.bib 
 biblio-style: plainnat
-subtitle: Team name
+subtitle: Group2
 header-includes:
 - \usepackage{titling}
 - \pretitle{\begin{center} 
